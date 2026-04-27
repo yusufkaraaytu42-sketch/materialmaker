@@ -1,22 +1,30 @@
-# Example input for material_xml_gui.py
+# Example input for the reworked GUI importer (material_xml_gui.py)
 
-MATERIAL: Air, gas
-DESCRIPTION: Dry air sample for demonstration
-CLASS: Fluids
-SUBCLASS: Gases
+MATERIAL: deneme
+CLASS: Hyperelastic
+DESCRIPTION: Example matching EngineeringData style
 
-PROPERTY: Density
-DEPENDENT: Density|kg m^-3|1.16,1.00,0.95
-INDEPENDENT: Temperature|C|23,100,150
-QUALIFIER: Behavior=Isotropic
-INTERPOLATION: Linear Multivariate (Qhull)
-EXTRAPOLATION: Projection to the Bounding Box
+PROPERTY: Color
+DEP: Red||182
+DEP: Green||229
+DEP: Blue||228
+DEP: Appearance||Appearance
 ENDPROPERTY
 
-PROPERTY: Viscosity
-DEPENDENT: Dynamic Viscosity|Pa s|1.832e-05,2.17e-05,2.60e-05
-INDEPENDENT: Temperature|C|23,100,200
-QUALIFIER: Behavior=Isotropic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+OPTION_NAME: Options Variable
+INTERPOLATION: Linear Multivariate
+EXTRAPOLATION: Projection to the Bounding Box
+DEP: Density|kg m^-3|12
+IND: Temperature|C|22
+ENDPROPERTY
+
+PROPERTY: Speed of Sound
+PQUAL: BETA=Mechanical.ModalAcoustics
+PQUAL: Field Variable Compatible=Temperature
+DEP: Speed of Sound|m s^-1|1222
+IND: Temperature|C|22
 ENDPROPERTY
 
 ENDMATERIAL

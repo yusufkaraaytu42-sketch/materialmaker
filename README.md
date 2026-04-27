@@ -47,3 +47,35 @@ print(db.to_json())
 
 - `example_engineering_data.xml`: sample XML for smoke testing.
 - `example_hyperelastic.xml`: sample matching real hyperelastic-style structure with multi-independent data and multiple dependent scalar parameters.
+- `example_materials.txt`: sample import file for the reworked GUI builder.
+
+## Reworked GUI builder
+
+Run:
+
+```bash
+python3 material_xml_gui.py
+```
+
+The GUI now builds XML in the same structural style as your real files:
+
+- root `<EngineeringData version=\"...\" versiondate=\"...\">`
+- `<Notes/>`
+- `<Materials><MatML_Doc>...`
+- material blocks with `<BulkDetails>` and repeated `<PropertyData>`
+- generated `<Metadata>` with `ParameterDetails` / `PropertyDetails` IDs (`pa0...`, `pr0...`)
+
+Property editor supports:
+
+- multiple dependent series (e.g. Red/Green/Blue or orthotropic constants)
+- multiple independent series
+- property qualifiers
+- interpolation/extrapolation option qualifiers
+- optional blank/unitless fields
+
+TXT import format uses:
+
+- `DEP: name|unit|v1,v2,...`
+- `IND: name|unit|v1,v2,...`
+- `PQUAL: key=value`
+- `OPTION_NAME`, `INTERPOLATION`, `EXTRAPOLATION`

@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""GUI tool to build EngineeringData XML from manual input or a text file."""
+"""GUI tool to build EngineeringData XML (Ansys Granta style)."""
 
 from __future__ import annotations
 
-import tkinter as tk
-from tkinter import filedialog, messagebox, ttk
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple
+import tkinter as tk
+from tkinter import filedialog, messagebox, ttk
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
-from typing import Dict, List, Optional
 
 
 @dataclass
-class IndependentSeries:
+class DataSeries:
     name: str
     unit: str = ""
     values: List[str] = field(default_factory=list)
@@ -22,13 +22,12 @@ class IndependentSeries:
 @dataclass
 class PropertyEntry:
     name: str
-    dependent_name: str
-    dependent_unit: str
-    dependent_values: List[str]
-    independent_vars: List[IndependentSeries] = field(default_factory=list)
     qualifiers: Dict[str, str] = field(default_factory=dict)
+    dependent_series: List[DataSeries] = field(default_factory=list)
+    independent_series: List[DataSeries] = field(default_factory=list)
     interpolation: Optional[str] = None
     extrapolation: Optional[str] = None
+    option_parameter_name: str = "Options Variable"
 
 
 @dataclass
@@ -41,80 +40,98 @@ class MaterialEntry:
 
 
 class EngineeringDataBuilder:
-    def __init__(self, materials: List[MaterialEntry]) -> None:
-        self.materials = materials
-        self.param_ids: Dict[tuple, str] = {}
-        self.prop_ids: Dict[str, str] = {}
-        self.pa_count = 1
-        self.pr_count = 1
+    """Builds XML with root EngineeringData > Notes + Materials > MatML_Doc."""
 
-    def _param_id(self, name: str, unit: str) -> str:
+    def __init__(self, materials: List[MaterialEntry], version: str, versiondate: str) -> None:
+        self.materials = materials
+        self.version = version
+        self.versiondate = versiondate
+        self.param_ids: Dict[Tuple[str, str], str] = {}
+        self.prop_ids: Dict[str, str] = {}
+        self.param_counter = 0
+        self.prop_counter = 0
+
+    def _alloc_param_id(self, name: str, unit: str) -> str:
         key = (name.strip(), unit.strip())
         if key not in self.param_ids:
-            self.param_ids[key] = f"pa{self.pa_count}"
-            self.pa_count += 1
+            self.param_ids[key] = f"pa{self.param_counter}"
+            self.param_counter += 1
         return self.param_ids[key]
 
-    def _prop_id(self, name: str) -> str:
-        if name not in self.prop_ids:
-            self.prop_ids[name] = f"pr{self.pr_count}"
-            self.pr_count += 1
-        return self.prop_ids[name]
+    def _alloc_prop_id(self, name: str) -> str:
+        key = name.strip() or "Unnamed Property"
+        if key not in self.prop_ids:
+            self.prop_ids[key] = f"pr{self.prop_counter}"
+            self.prop_counter += 1
+        return self.prop_ids[key]
 
     @staticmethod
     def _append_units(parent: ET.Element, unit_text: str) -> None:
         if not unit_text.strip():
+            ET.SubElement(parent, "Unitless")
             return
+
         units = ET.SubElement(parent, "Units")
-        for token in unit_text.split():
-            token = token.strip()
-            if not token:
-                continue
-            power = None
-            name = token
+        for token in [t.strip() for t in unit_text.split() if t.strip()]:
+            node = ET.SubElement(units, "Unit")
             if "^" in token:
-                base, pow_text = token.split("^", 1)
-                name = base
-                power = pow_text
-            u = ET.SubElement(units, "Unit")
-            if power is not None:
-                u.set("power", power)
-            ET.SubElement(u, "Name").text = name
+                base, power = token.split("^", 1)
+                node.set("power", power)
+                ET.SubElement(node, "Name").text = base
+            else:
+                ET.SubElement(node, "Name").text = token
 
     @staticmethod
-    def _prettify(elem: ET.Element) -> str:
-        rough = ET.tostring(elem, encoding="utf-8")
-        parsed = minidom.parseString(rough)
-        return parsed.toprettyxml(indent="  ")
+    def _to_csv(values: List[str]) -> str:
+        return ",".join(v.strip() for v in values if v.strip())
+
+    @staticmethod
+    def _var_type(kind: str, count: int) -> str:
+        if count <= 0:
+            return kind
+        return ",".join([kind] * count)
+
+    @staticmethod
+    def prettify(root: ET.Element) -> str:
+        rough = ET.tostring(root, encoding="utf-8")
+        return minidom.parseString(rough).toprettyxml(indent="  ")
 
     def build(self) -> ET.Element:
-        root = ET.Element("EngineeringData", version="1.0", versiondate="2026-04-27")
-        item = ET.SubElement(root, "item")
-        doc = ET.SubElement(item, "MatML_Doc")
+        root = ET.Element("EngineeringData", version=self.version, versiondate=self.versiondate)
+        ET.SubElement(root, "Notes")
+        materials_el = ET.SubElement(root, "Materials")
+        doc = ET.SubElement(materials_el, "MatML_Doc")
 
-        for material in self.materials:
-            m = ET.SubElement(doc, "Material")
-            bulk = ET.SubElement(m, "BulkDetails")
-            ET.SubElement(bulk, "Name").text = material.name
-            ET.SubElement(bulk, "Description").text = material.description
+        # pre-register option parameter if needed
+        for mat in self.materials:
+            for prop in mat.properties:
+                if prop.interpolation or prop.extrapolation:
+                    self._alloc_param_id(prop.option_parameter_name, "")
 
-            cls = ET.SubElement(bulk, "Class")
-            ET.SubElement(cls, "Name").text = material.material_class
+        for mat in self.materials:
+            material_el = ET.SubElement(doc, "Material")
+            bulk = ET.SubElement(material_el, "BulkDetails")
+            ET.SubElement(bulk, "Name").text = mat.name
+            if mat.description:
+                ET.SubElement(bulk, "Description").text = mat.description
+            if mat.material_class:
+                cls = ET.SubElement(bulk, "Class")
+                ET.SubElement(cls, "Name").text = mat.material_class
+            if mat.subclass:
+                sub = ET.SubElement(bulk, "Subclass")
+                ET.SubElement(sub, "Name").text = mat.subclass
 
-            subcls = ET.SubElement(bulk, "Subclass")
-            ET.SubElement(subcls, "Name").text = material.subclass
-
-            for prop in material.properties:
-                prop_id = self._prop_id(prop.name)
-                pnode = ET.SubElement(bulk, "PropertyData", property=prop_id)
+            for prop in mat.properties:
+                pnode = ET.SubElement(bulk, "PropertyData", property=self._alloc_prop_id(prop.name))
                 ET.SubElement(pnode, "Data", format="string").text = "-"
 
-                for q_name, q_val in prop.qualifiers.items():
-                    q = ET.SubElement(pnode, "Qualifier", name=q_name)
-                    q.text = q_val
+                for qk, qv in prop.qualifiers.items():
+                    q = ET.SubElement(pnode, "Qualifier", name=qk)
+                    q.text = qv
 
                 if prop.interpolation or prop.extrapolation:
-                    opt = ET.SubElement(pnode, "ParameterValue", parameter="pa6", format="string")
+                    opt_pid = self._alloc_param_id(prop.option_parameter_name, "")
+                    opt = ET.SubElement(pnode, "ParameterValue", parameter=opt_pid, format="string")
                     ET.SubElement(opt, "Data").text = "Interpolation Options"
                     if prop.interpolation:
                         q = ET.SubElement(opt, "Qualifier", name="AlgorithmType")
@@ -123,342 +140,334 @@ class EngineeringDataBuilder:
                         q = ET.SubElement(opt, "Qualifier", name="ExtrapolationType")
                         q.text = prop.extrapolation
 
-                dep_param = self._param_id(prop.dependent_name, prop.dependent_unit)
-                dep = ET.SubElement(pnode, "ParameterValue", parameter=dep_param)
-                ET.SubElement(dep, "Data").text = ",".join(prop.dependent_values)
-                dep_q = ET.SubElement(dep, "Qualifier", name="Variable Type")
-                dep_q.text = ",".join(["Dependent"] * len(prop.dependent_values))
+                for dep in prop.dependent_series:
+                    pid = self._alloc_param_id(dep.name, dep.unit)
+                    pval = ET.SubElement(pnode, "ParameterValue", parameter=pid, format="float")
+                    ET.SubElement(pval, "Data").text = self._to_csv(dep.values)
+                    q = ET.SubElement(pval, "Qualifier", name="Variable Type")
+                    q.text = self._var_type("Dependent", len(dep.values))
 
-                for indep in prop.independent_vars:
-                    ind_param = self._param_id(indep.name, indep.unit)
-                    ip = ET.SubElement(pnode, "ParameterValue", parameter=ind_param)
-                    ET.SubElement(ip, "Data").text = ",".join(indep.values)
-                    q_var = ET.SubElement(ip, "Qualifier", name="Variable Type")
-                    q_var.text = ",".join(["Independent"] * len(indep.values))
-                    q_field = ET.SubElement(ip, "Qualifier", name="Field Variable")
-                    q_field.text = indep.name
+                for indep in prop.independent_series:
+                    pid = self._alloc_param_id(indep.name, indep.unit)
+                    pval = ET.SubElement(pnode, "ParameterValue", parameter=pid, format="float")
+                    ET.SubElement(pval, "Data").text = self._to_csv(indep.values)
+                    q = ET.SubElement(pval, "Qualifier", name="Variable Type")
+                    q.text = self._var_type("Independent", len(indep.values))
+                    qf = ET.SubElement(pval, "Qualifier", name="Field Variable")
+                    qf.text = indep.name
                     if indep.unit:
-                        q_units = ET.SubElement(ip, "Qualifier", name="Field Units")
-                        q_units.text = indep.unit
+                        qu = ET.SubElement(pval, "Qualifier", name="Field Units")
+                        qu.text = indep.unit
 
         metadata = ET.SubElement(doc, "Metadata")
-
-        pa6 = ET.SubElement(metadata, "ParameterDetails", id="pa6")
-        ET.SubElement(pa6, "Name").text = "Interpolation Options"
-
-        for (pname, punit), pid in sorted(self.param_ids.items(), key=lambda x: int(x[1][2:])):
+        for (name, unit), pid in sorted(self.param_ids.items(), key=lambda x: int(x[1][2:])):
             pd = ET.SubElement(metadata, "ParameterDetails", id=pid)
-            ET.SubElement(pd, "Name").text = pname
-            self._append_units(pd, punit)
+            ET.SubElement(pd, "Name").text = name
+            self._append_units(pd, unit)
 
         for pname, prid in sorted(self.prop_ids.items(), key=lambda x: int(x[1][2:])):
-            prop = ET.SubElement(metadata, "PropertyDetails", id=prid)
-            ET.SubElement(prop, "Name").text = pname
+            pr = ET.SubElement(metadata, "PropertyDetails", id=prid)
+            ET.SubElement(pr, "Unitless")
+            ET.SubElement(pr, "Name").text = pname
 
         return root
 
 
 class TextListParser:
-    """Parses a simple list format from .txt into materials.
+    """Simple import format for the GUI.
 
-    Format:
-      MATERIAL: Air, gas
-      DESCRIPTION: Some text
-      CLASS: Fluids
-      SUBCLASS: Gases
-
-      PROPERTY: Density
-      DEPENDENT: Density|kg m^-3|1.16,1.00
-      INDEPENDENT: Temperature|C|23,100
-      QUALIFIER: Behavior=Isotropic
-      INTERPOLATION: Linear Multivariate (Qhull)
-      EXTRAPOLATION: Projection to the Bounding Box
-      ENDPROPERTY
-      ENDMATERIAL
+    MATERIAL: deneme
+    DESCRIPTION: optional
+    CLASS: Hyperelastic
+    SUBCLASS: optional
+    PROPERTY: Density
+    PQUAL: Field Variable Compatible=Temperature
+    OPTION_NAME: Options Variable
+    INTERPOLATION: Linear Multivariate
+    EXTRAPOLATION: Projection to the Bounding Box
+    DEP: Density|kg m^-3|12
+    IND: Temperature|C|22
+    ENDPROPERTY
+    ENDMATERIAL
     """
 
     def parse(self, content: str) -> List[MaterialEntry]:
-        materials: List[MaterialEntry] = []
-        cur_mat: Optional[MaterialEntry] = None
-        cur_prop: Optional[PropertyEntry] = None
+        mats: List[MaterialEntry] = []
+        m: Optional[MaterialEntry] = None
+        p: Optional[PropertyEntry] = None
 
-        for raw_line in content.splitlines():
-            line = raw_line.strip()
+        for raw in content.splitlines():
+            line = raw.strip()
             if not line or line.startswith("#"):
                 continue
 
             if line == "ENDPROPERTY":
-                if cur_mat and cur_prop:
-                    self._validate_property(cur_prop)
-                    cur_mat.properties.append(cur_prop)
-                cur_prop = None
+                if m and p:
+                    m.properties.append(p)
+                p = None
                 continue
-
             if line == "ENDMATERIAL":
-                if cur_mat:
-                    materials.append(cur_mat)
-                cur_mat = None
+                if m:
+                    mats.append(m)
+                m = None
                 continue
-
             if ":" not in line:
                 continue
 
-            key, value = [part.strip() for part in line.split(":", 1)]
+            key, val = [x.strip() for x in line.split(":", 1)]
             key = key.upper()
 
             if key == "MATERIAL":
-                cur_mat = MaterialEntry(name=value)
-            elif key == "DESCRIPTION" and cur_mat:
-                cur_mat.description = value
-            elif key == "CLASS" and cur_mat:
-                cur_mat.material_class = value
-            elif key == "SUBCLASS" and cur_mat:
-                cur_mat.subclass = value
+                m = MaterialEntry(name=val)
+            elif key == "DESCRIPTION" and m:
+                m.description = val
+            elif key == "CLASS" and m:
+                m.material_class = val
+            elif key == "SUBCLASS" and m:
+                m.subclass = val
             elif key == "PROPERTY":
-                cur_prop = PropertyEntry(
-                    name=value,
-                    dependent_name="Value",
-                    dependent_unit="",
-                    dependent_values=[],
-                )
-            elif key == "DEPENDENT" and cur_prop:
-                p_name, unit, vals = self._split_triplet(value)
-                cur_prop.dependent_name = p_name
-                cur_prop.dependent_unit = unit
-                cur_prop.dependent_values = self._split_values(vals)
-            elif key == "INDEPENDENT" and cur_prop:
-                p_name, unit, vals = self._split_triplet(value)
-                cur_prop.independent_vars.append(
-                    IndependentSeries(name=p_name, unit=unit, values=self._split_values(vals))
-                )
-            elif key == "QUALIFIER" and cur_prop and "=" in value:
-                qk, qv = [x.strip() for x in value.split("=", 1)]
-                cur_prop.qualifiers[qk] = qv
-            elif key == "INTERPOLATION" and cur_prop:
-                cur_prop.interpolation = value
-            elif key == "EXTRAPOLATION" and cur_prop:
-                cur_prop.extrapolation = value
+                p = PropertyEntry(name=val)
+            elif key == "PQUAL" and p and "=" in val:
+                qk, qv = [x.strip() for x in val.split("=", 1)]
+                p.qualifiers[qk] = qv
+            elif key == "OPTION_NAME" and p:
+                p.option_parameter_name = val or "Options Variable"
+            elif key == "INTERPOLATION" and p:
+                p.interpolation = val
+            elif key == "EXTRAPOLATION" and p:
+                p.extrapolation = val
+            elif key in {"DEP", "IND"} and p:
+                name, unit, values = self._parse_triplet(val)
+                series = DataSeries(name=name, unit=unit, values=self._split_values(values))
+                if key == "DEP":
+                    p.dependent_series.append(series)
+                else:
+                    p.independent_series.append(series)
 
-        if cur_prop and cur_mat:
-            self._validate_property(cur_prop)
-            cur_mat.properties.append(cur_prop)
-        if cur_mat:
-            materials.append(cur_mat)
+        if p and m:
+            m.properties.append(p)
+        if m:
+            mats.append(m)
 
-        return materials
-
-    @staticmethod
-    def _split_triplet(value: str) -> tuple[str, str, str]:
-        parts = [p.strip() for p in value.split("|")]
-        if len(parts) != 3:
-            raise ValueError(f"Expected 3 parts (name|unit|values), got: {value}")
-        return parts[0], parts[1], parts[2]
+        return mats
 
     @staticmethod
     def _split_values(value: str) -> List[str]:
         return [v.strip() for v in value.split(",") if v.strip()]
 
     @staticmethod
-    def _validate_property(prop: PropertyEntry) -> None:
-        if not prop.dependent_values:
-            raise ValueError(f"Property '{prop.name}' has no dependent values")
-        dep_count = len(prop.dependent_values)
-        for indep in prop.independent_vars:
-            if len(indep.values) != dep_count:
-                raise ValueError(
-                    f"Value count mismatch in '{prop.name}': dependent={dep_count}, "
-                    f"{indep.name}={len(indep.values)}"
-                )
+    def _parse_triplet(value: str) -> Tuple[str, str, str]:
+        parts = [x.strip() for x in value.split("|")]
+        if len(parts) != 3:
+            raise ValueError(f"Expected name|unit|values, got: {value}")
+        return parts[0], parts[1], parts[2]
 
 
 class App(tk.Tk):
     def __init__(self) -> None:
         super().__init__()
-        self.title("Material XML Builder")
-        self.geometry("1050x700")
+        self.title("EngineeringData XML Builder")
+        self.geometry("1150x760")
 
         self.materials: List[MaterialEntry] = []
-        self.current_material: Optional[MaterialEntry] = None
         self.pending_properties: List[PropertyEntry] = []
 
         self._build_ui()
 
     def _build_ui(self) -> None:
-        top = ttk.LabelFrame(self, text="Material Details")
-        top.pack(fill="x", padx=10, pady=8)
+        # file/header
+        hdr = ttk.LabelFrame(self, text="EngineeringData Header")
+        hdr.pack(fill="x", padx=10, pady=6)
+        self.version = tk.StringVar(value="25.2.0.233")
+        self.versiondate = tk.StringVar(value="6/12/2025 11:41:00 AM")
+        ttk.Label(hdr, text="version").grid(row=0, column=0, sticky="w")
+        ttk.Entry(hdr, textvariable=self.version, width=24).grid(row=0, column=1, padx=6)
+        ttk.Label(hdr, text="versiondate").grid(row=0, column=2, sticky="w")
+        ttk.Entry(hdr, textvariable=self.versiondate, width=30).grid(row=0, column=3, padx=6)
 
-        self.name_var = tk.StringVar()
-        self.class_var = tk.StringVar()
-        self.subclass_var = tk.StringVar()
+        mat = ttk.LabelFrame(self, text="Material")
+        mat.pack(fill="x", padx=10, pady=6)
+        self.mat_name = tk.StringVar()
+        self.mat_class = tk.StringVar()
+        self.mat_subclass = tk.StringVar()
+        ttk.Label(mat, text="Name").grid(row=0, column=0, sticky="w")
+        ttk.Entry(mat, textvariable=self.mat_name, width=42).grid(row=0, column=1, sticky="we", padx=4)
+        ttk.Label(mat, text="Class").grid(row=0, column=2, sticky="w")
+        ttk.Entry(mat, textvariable=self.mat_class, width=30).grid(row=0, column=3, sticky="we", padx=4)
+        ttk.Label(mat, text="Subclass").grid(row=1, column=0, sticky="w")
+        ttk.Entry(mat, textvariable=self.mat_subclass, width=42).grid(row=1, column=1, sticky="we", padx=4)
+        ttk.Label(mat, text="Description").grid(row=2, column=0, sticky="nw")
+        self.mat_description = tk.Text(mat, width=90, height=3)
+        self.mat_description.grid(row=2, column=1, columnspan=3, sticky="we", padx=4, pady=3)
 
-        ttk.Label(top, text="Name").grid(row=0, column=0, sticky="w")
-        ttk.Entry(top, textvariable=self.name_var, width=40).grid(row=0, column=1, sticky="we", padx=5)
-
-        ttk.Label(top, text="Class").grid(row=0, column=2, sticky="w")
-        ttk.Entry(top, textvariable=self.class_var, width=30).grid(row=0, column=3, sticky="we", padx=5)
-
-        ttk.Label(top, text="Subclass").grid(row=1, column=0, sticky="w")
-        ttk.Entry(top, textvariable=self.subclass_var, width=40).grid(row=1, column=1, sticky="we", padx=5)
-
-        ttk.Label(top, text="Description").grid(row=2, column=0, sticky="nw")
-        self.desc_text = tk.Text(top, height=4, width=90)
-        self.desc_text.grid(row=2, column=1, columnspan=3, sticky="we", pady=4)
-
-        prop_frame = ttk.LabelFrame(self, text="Property Editor")
-        prop_frame.pack(fill="x", padx=10, pady=8)
-
+        prop = ttk.LabelFrame(self, text="Property (supports multiple dependent/independent series)")
+        prop.pack(fill="x", padx=10, pady=6)
         self.prop_name = tk.StringVar()
-        self.dep_name = tk.StringVar(value="Value")
-        self.dep_unit = tk.StringVar()
-        self.dep_values = tk.StringVar()
-        self.indep_name = tk.StringVar(value="Temperature")
-        self.indep_unit = tk.StringVar(value="C")
-        self.indep_values = tk.StringVar()
-        self.qualifier = tk.StringVar()
-        self.interpolation = tk.StringVar()
-        self.extrapolation = tk.StringVar()
+        self.option_name = tk.StringVar(value="Options Variable")
+        self.interp = tk.StringVar()
+        self.extrap = tk.StringVar()
 
-        row = 0
-        for label, var in [
-            ("Property Name", self.prop_name),
-            ("Dependent Name", self.dep_name),
-            ("Dependent Unit", self.dep_unit),
-            ("Dependent Values (comma-separated)", self.dep_values),
-            ("Independent Name", self.indep_name),
-            ("Independent Unit", self.indep_unit),
-            ("Independent Values (comma-separated)", self.indep_values),
-            ("Qualifiers (k=v;k2=v2)", self.qualifier),
-            ("Interpolation", self.interpolation),
-            ("Extrapolation", self.extrapolation),
-        ]:
-            ttk.Label(prop_frame, text=label).grid(row=row, column=0, sticky="w")
-            ttk.Entry(prop_frame, textvariable=var, width=90).grid(row=row, column=1, sticky="we", pady=2)
-            row += 1
+        ttk.Label(prop, text="Property Name").grid(row=0, column=0, sticky="w")
+        ttk.Entry(prop, textvariable=self.prop_name, width=45).grid(row=0, column=1, sticky="we", padx=4)
 
-        ttk.Button(prop_frame, text="Add Property", command=self.add_property).grid(row=row, column=0, pady=6)
-        ttk.Button(prop_frame, text="Clear Fields", command=self.clear_property_fields).grid(row=row, column=1, sticky="w")
+        ttk.Label(prop, text="Option Param Name").grid(row=0, column=2, sticky="w")
+        ttk.Entry(prop, textvariable=self.option_name, width=28).grid(row=0, column=3, sticky="we", padx=4)
 
-        list_frame = ttk.LabelFrame(self, text="Pending Properties / Materials")
-        list_frame.pack(fill="both", expand=True, padx=10, pady=8)
+        ttk.Label(prop, text="Interpolation").grid(row=1, column=0, sticky="w")
+        ttk.Entry(prop, textvariable=self.interp, width=45).grid(row=1, column=1, sticky="we", padx=4)
+        ttk.Label(prop, text="Extrapolation").grid(row=1, column=2, sticky="w")
+        ttk.Entry(prop, textvariable=self.extrap, width=28).grid(row=1, column=3, sticky="we", padx=4)
 
-        self.prop_list = tk.Listbox(list_frame, height=10)
-        self.prop_list.pack(fill="both", expand=True, padx=5, pady=5)
+        ttk.Label(prop, text="Property qualifiers (one per line: key=value)").grid(row=2, column=0, sticky="nw")
+        self.prop_qualifiers = tk.Text(prop, width=55, height=4)
+        self.prop_qualifiers.grid(row=2, column=1, sticky="we", padx=4)
 
-        btns = ttk.Frame(self)
-        btns.pack(fill="x", padx=10, pady=8)
-        ttk.Button(btns, text="Save Current Material", command=self.save_current_material).pack(side="left", padx=5)
-        ttk.Button(btns, text="Import Materials from TXT", command=self.import_txt).pack(side="left", padx=5)
-        ttk.Button(btns, text="Export XML", command=self.export_xml).pack(side="right", padx=5)
+        ttk.Label(prop, text="Dependent series (one per line: name|unit|v1,v2)").grid(row=2, column=2, sticky="nw")
+        self.dep_series_text = tk.Text(prop, width=55, height=4)
+        self.dep_series_text.grid(row=2, column=3, sticky="we", padx=4)
 
-    def clear_property_fields(self) -> None:
+        ttk.Label(prop, text="Independent series (one per line: name|unit|v1,v2)").grid(row=3, column=0, sticky="nw")
+        self.ind_series_text = tk.Text(prop, width=110, height=4)
+        self.ind_series_text.grid(row=3, column=1, columnspan=3, sticky="we", padx=4, pady=4)
+
+        ttk.Button(prop, text="Add Property", command=self.add_property).grid(row=4, column=0, pady=4)
+        ttk.Button(prop, text="Clear Property Inputs", command=self.clear_property_inputs).grid(row=4, column=1, sticky="w")
+
+        list_box = ttk.LabelFrame(self, text="Queue")
+        list_box.pack(fill="both", expand=True, padx=10, pady=6)
+        self.queue = tk.Listbox(list_box, height=12)
+        self.queue.pack(fill="both", expand=True, padx=4, pady=4)
+
+        actions = ttk.Frame(self)
+        actions.pack(fill="x", padx=10, pady=8)
+        ttk.Button(actions, text="Save Material", command=self.save_material).pack(side="left", padx=4)
+        ttk.Button(actions, text="Import TXT", command=self.import_txt).pack(side="left", padx=4)
+        ttk.Button(actions, text="Export XML", command=self.export_xml).pack(side="right", padx=4)
+
+    @staticmethod
+    def _parse_series_block(block: str) -> List[DataSeries]:
+        result: List[DataSeries] = []
+        for line in block.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            parts = [x.strip() for x in line.split("|")]
+            if len(parts) != 3:
+                raise ValueError(f"Invalid series line: {line}")
+            values = [v.strip() for v in parts[2].split(",") if v.strip()]
+            result.append(DataSeries(name=parts[0], unit=parts[1], values=values))
+        return result
+
+    @staticmethod
+    def _parse_qualifiers(block: str) -> Dict[str, str]:
+        data: Dict[str, str] = {}
+        for line in block.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            if "=" not in line:
+                raise ValueError(f"Invalid qualifier line: {line}")
+            k, v = [x.strip() for x in line.split("=", 1)]
+            data[k] = v
+        return data
+
+    def clear_property_inputs(self) -> None:
         self.prop_name.set("")
-        self.dep_name.set("Value")
-        self.dep_unit.set("")
-        self.dep_values.set("")
-        self.indep_name.set("Temperature")
-        self.indep_unit.set("C")
-        self.indep_values.set("")
-        self.qualifier.set("")
-        self.interpolation.set("")
-        self.extrapolation.set("")
+        self.option_name.set("Options Variable")
+        self.interp.set("")
+        self.extrap.set("")
+        self.prop_qualifiers.delete("1.0", "end")
+        self.dep_series_text.delete("1.0", "end")
+        self.ind_series_text.delete("1.0", "end")
 
     def add_property(self) -> None:
-        dep_values = [x.strip() for x in self.dep_values.get().split(",") if x.strip()]
-        indep_values = [x.strip() for x in self.indep_values.get().split(",") if x.strip()]
-        if not self.prop_name.get().strip() or not dep_values:
-            messagebox.showerror("Invalid property", "Property name and dependent values are required.")
-            return
-        if indep_values and len(indep_values) != len(dep_values):
-            messagebox.showerror("Invalid property", "Independent and dependent value counts must match.")
-            return
+        try:
+            name = self.prop_name.get().strip()
+            if not name:
+                raise ValueError("Property name is required")
 
-        qualifiers: Dict[str, str] = {}
-        if self.qualifier.get().strip():
-            for chunk in self.qualifier.get().split(";"):
-                if "=" in chunk:
-                    k, v = [x.strip() for x in chunk.split("=", 1)]
-                    qualifiers[k] = v
+            qualifiers = self._parse_qualifiers(self.prop_qualifiers.get("1.0", "end"))
+            deps = self._parse_series_block(self.dep_series_text.get("1.0", "end"))
+            inds = self._parse_series_block(self.ind_series_text.get("1.0", "end"))
 
-        indeps = []
-        if indep_values:
-            indeps.append(
-                IndependentSeries(
-                    name=self.indep_name.get().strip() or "Independent",
-                    unit=self.indep_unit.get().strip(),
-                    values=indep_values,
-                )
+            # validate lengths when available
+            if deps:
+                ref_count = len(deps[0].values)
+                for d in deps[1:]:
+                    if len(d.values) != ref_count:
+                        raise ValueError("All dependent series must have the same number of values")
+                for i in inds:
+                    if len(i.values) not in (0, ref_count):
+                        raise ValueError("Independent series count must match dependent series count")
+
+            p = PropertyEntry(
+                name=name,
+                qualifiers=qualifiers,
+                dependent_series=deps,
+                independent_series=inds,
+                interpolation=self.interp.get().strip() or None,
+                extrapolation=self.extrap.get().strip() or None,
+                option_parameter_name=self.option_name.get().strip() or "Options Variable",
             )
+            self.pending_properties.append(p)
+            self.queue.insert("end", f"Property queued: {p.name}")
+            self.clear_property_inputs()
+        except Exception as exc:
+            messagebox.showerror("Invalid property", str(exc))
 
-        prop = PropertyEntry(
-            name=self.prop_name.get().strip(),
-            dependent_name=self.dep_name.get().strip() or "Value",
-            dependent_unit=self.dep_unit.get().strip(),
-            dependent_values=dep_values,
-            independent_vars=indeps,
-            qualifiers=qualifiers,
-            interpolation=self.interpolation.get().strip() or None,
-            extrapolation=self.extrapolation.get().strip() or None,
-        )
+    def save_material(self) -> None:
+        try:
+            name = self.mat_name.get().strip()
+            if not name:
+                raise ValueError("Material name is required")
+            m = MaterialEntry(
+                name=name,
+                description=self.mat_description.get("1.0", "end").strip(),
+                material_class=self.mat_class.get().strip(),
+                subclass=self.mat_subclass.get().strip(),
+                properties=list(self.pending_properties),
+            )
+            self.materials.append(m)
+            self.pending_properties.clear()
+            self.queue.insert("end", f"Material saved: {m.name} ({len(m.properties)} properties)")
 
-        self.pending_properties.append(prop)
-        self.prop_list.insert("end", f"Property: {prop.name} ({len(dep_values)} pts)")
-        self.clear_property_fields()
-
-    def save_current_material(self) -> None:
-        name = self.name_var.get().strip()
-        if not name:
-            messagebox.showerror("Missing name", "Material name is required.")
-            return
-        if not self.pending_properties:
-            if not messagebox.askyesno("No properties", "Save material without properties?"):
-                return
-
-        material = MaterialEntry(
-            name=name,
-            description=self.desc_text.get("1.0", "end").strip(),
-            material_class=self.class_var.get().strip(),
-            subclass=self.subclass_var.get().strip(),
-            properties=list(self.pending_properties),
-        )
-        self.materials.append(material)
-        self.pending_properties.clear()
-        self.prop_list.insert("end", f"Material saved: {material.name} ({len(material.properties)} properties)")
-
-        self.name_var.set("")
-        self.class_var.set("")
-        self.subclass_var.set("")
-        self.desc_text.delete("1.0", "end")
+            self.mat_name.set("")
+            self.mat_class.set("")
+            self.mat_subclass.set("")
+            self.mat_description.delete("1.0", "end")
+        except Exception as exc:
+            messagebox.showerror("Cannot save material", str(exc))
 
     def import_txt(self) -> None:
-        path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+        path = filedialog.askopenfilename(filetypes=[("Text", "*.txt"), ("All", "*.*")])
         if not path:
             return
         try:
             content = Path(path).read_text(encoding="utf-8")
-            parser = TextListParser()
-            parsed = parser.parse(content)
+            parsed = TextListParser().parse(content)
             self.materials.extend(parsed)
-            self.prop_list.insert("end", f"Imported {len(parsed)} materials from {Path(path).name}")
-            messagebox.showinfo("Import complete", f"Imported {len(parsed)} material(s).")
+            self.queue.insert("end", f"Imported {len(parsed)} materials from {Path(path).name}")
         except Exception as exc:
             messagebox.showerror("Import failed", str(exc))
 
     def export_xml(self) -> None:
         if self.pending_properties:
-            if messagebox.askyesno("Unsaved material", "You have pending properties. Save as a material now?"):
-                self.save_current_material()
+            if messagebox.askyesno("Pending properties", "Save current material first?"):
+                self.save_material()
+
         if not self.materials:
-            messagebox.showerror("Nothing to export", "No materials available. Add or import first.")
+            messagebox.showerror("Nothing to export", "No saved materials")
             return
 
-        path = filedialog.asksaveasfilename(defaultextension=".xml", filetypes=[("XML files", "*.xml")])
-        if not path:
+        out = filedialog.asksaveasfilename(defaultextension=".xml", filetypes=[("XML", "*.xml")])
+        if not out:
             return
 
-        root = EngineeringDataBuilder(self.materials).build()
-        xml_str = EngineeringDataBuilder._prettify(root)
-        Path(path).write_text(xml_str, encoding="utf-8")
-        messagebox.showinfo("Export complete", f"Wrote XML file:\n{path}")
+        builder = EngineeringDataBuilder(self.materials, self.version.get().strip(), self.versiondate.get().strip())
+        root = builder.build()
+        xml = EngineeringDataBuilder.prettify(root)
+        Path(out).write_text(xml, encoding="utf-8")
+        messagebox.showinfo("Done", f"Saved: {out}")
 
 
 def main() -> None:
