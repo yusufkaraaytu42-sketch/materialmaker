@@ -79,3 +79,11 @@ TXT import format uses:
 - `IND: name|unit|v1,v2,...`
 - `PQUAL: key=value`
 - `OPTION_NAME`, `INTERPOLATION`, `EXTRAPOLATION`
+
+### Auto-complete properties from `AllXmls.zip`
+
+`material_xml_gui.py` now loads property templates from `AllXmls.zip` (if present) and auto-adds missing properties during TXT import.
+
+- Default behavior per material is `AUTO_PROPERTIES: ALL` (include every known template not already defined).
+- You can disable it for a material with `AUTO_PROPERTIES: NONE`.
+- Any explicit `PROPERTY ... ENDPROPERTY` block in your TXT takes priority; templates only fill the gaps.

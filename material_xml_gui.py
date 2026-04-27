@@ -10,6 +10,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+import zipfile
 
 
 @dataclass
@@ -202,10 +203,154 @@ class TextListParser:
     ENDPROPERTY
     ENDMATERIAL
     """
+    @dataclass
+    class PropertyTemplate:
+        qualifiers: Dict[str, str] = field(default_factory=dict)
+        dependent_series: List[DataSeries] = field(default_factory=list)
+        independent_series: List[DataSeries] = field(default_factory=list)
+        interpolation: Optional[str] = None
+        extrapolation: Optional[str] = None
+        option_parameter_name: str = "Options Variable"
+
+    def __init__(self, template_zip: str = "AllXmls.zip") -> None:
+        self.templates: Dict[str, TextListParser.PropertyTemplate] = self._load_templates(Path(template_zip))
+
+    @staticmethod
+    def _read_template_from_propertydata(
+        pnode: ET.Element, prop_name: str, param_map: Dict[str, Tuple[str, str]]
+    ) -> "TextListParser.PropertyTemplate":
+        qualifiers: Dict[str, str] = {}
+        dependent_series: List[DataSeries] = []
+        independent_series: List[DataSeries] = []
+        interpolation: Optional[str] = None
+        extrapolation: Optional[str] = None
+        option_parameter_name = "Options Variable"
+
+        for q in pnode.findall("Qualifier"):
+            name = q.attrib.get("name", "").strip()
+            value = (q.text or "").strip()
+            if name:
+                qualifiers[name] = value
+
+        for pval in pnode.findall("ParameterValue"):
+            pid = pval.attrib.get("parameter", "")
+            series_name, series_unit = param_map.get(pid, (pid or "Unknown", ""))
+            csv = (pval.findtext("Data") or "").strip()
+            values = [v.strip() for v in csv.split(",") if v.strip()]
+            qmap: Dict[str, str] = {}
+            for q in pval.findall("Qualifier"):
+                qn = q.attrib.get("name", "").strip()
+                qv = (q.text or "").strip()
+                if qn:
+                    qmap[qn] = qv
+
+            vtype = qmap.get("Variable Type", "").lower()
+            if "independent" in vtype:
+                independent_series.append(
+                    DataSeries(
+                        name=qmap.get("Field Variable", series_name),
+                        unit=qmap.get("Field Units", series_unit),
+                        values=values,
+                        default=qmap.get("Default Data", ""),
+                    )
+                )
+            elif "dependent" in vtype:
+                dependent_series.append(DataSeries(name=series_name, unit=series_unit, values=values, default=""))
+            elif "Interpolation Options" in csv:
+                option_parameter_name = series_name or "Options Variable"
+                interpolation = qmap.get("AlgorithmType")
+                extrapolation = qmap.get("ExtrapolationType")
+            else:
+                dependent_series.append(DataSeries(name=series_name, unit=series_unit, values=values, default=""))
+
+        return TextListParser.PropertyTemplate(
+            qualifiers=qualifiers,
+            dependent_series=dependent_series,
+            independent_series=independent_series,
+            interpolation=interpolation,
+            extrapolation=extrapolation,
+            option_parameter_name=option_parameter_name,
+        )
+
+    def _load_templates(self, zip_path: Path) -> Dict[str, "TextListParser.PropertyTemplate"]:
+        templates: Dict[str, TextListParser.PropertyTemplate] = {}
+        if not zip_path.exists():
+            return templates
+
+        try:
+            with zipfile.ZipFile(zip_path) as zf:
+                for member in zf.namelist():
+                    if not member.lower().endswith(".xml"):
+                        continue
+                    try:
+                        root = ET.fromstring(zf.read(member))
+                    except Exception:
+                        continue
+
+                    for matml in root.findall(".//MatML_Doc"):
+                        metadata = matml.find("Metadata")
+                        if metadata is None:
+                            continue
+                        prop_map: Dict[str, str] = {}
+                        param_map: Dict[str, Tuple[str, str]] = {}
+
+                        for pd in metadata.findall("PropertyDetails"):
+                            pid = pd.attrib.get("id", "").strip()
+                            name = (pd.findtext("Name") or "").strip()
+                            if pid and name:
+                                prop_map[pid] = name
+
+                        for pa in metadata.findall("ParameterDetails"):
+                            pid = pa.attrib.get("id", "").strip()
+                            name = (pa.findtext("Name") or "").strip()
+                            unit_tokens: List[str] = []
+                            units_node = pa.find("Units")
+                            if units_node is not None:
+                                for u in units_node.findall("Unit"):
+                                    uname = (u.findtext("Name") or "").strip()
+                                    if not uname:
+                                        continue
+                                    power = u.attrib.get("power")
+                                    unit_tokens.append(f"{uname}^{power}" if power is not None else uname)
+                            unit = " ".join(unit_tokens)
+                            if pid and name:
+                                param_map[pid] = (name, unit)
+
+                        for pnode in matml.findall(".//PropertyData"):
+                            prop_id = pnode.attrib.get("property", "").strip()
+                            prop_name = prop_map.get(prop_id, "").strip()
+                            if not prop_name or prop_name in templates:
+                                continue
+                            templates[prop_name] = self._read_template_from_propertydata(pnode, prop_name, param_map)
+        except Exception:
+            return templates
+
+        return templates
+
+    def _apply_templates(self, material: MaterialEntry, mode: str) -> None:
+        if mode.upper() in {"NONE", "OFF", "FALSE", "NO"}:
+            return
+        existing = {p.name.casefold() for p in material.properties}
+        for prop_name, template in self.templates.items():
+            if prop_name.casefold() in existing:
+                continue
+            material.properties.append(
+                PropertyEntry(
+                    name=prop_name,
+                    qualifiers=dict(template.qualifiers),
+                    dependent_series=[DataSeries(name=s.name, unit=s.unit, values=list(s.values), default=s.default) for s in template.dependent_series],
+                    independent_series=[DataSeries(name=s.name, unit=s.unit, values=list(s.values), default=s.default) for s in template.independent_series],
+                    interpolation=template.interpolation,
+                    extrapolation=template.extrapolation,
+                    option_parameter_name=template.option_parameter_name,
+                )
+            )
+
     def parse(self, content: str) -> List[MaterialEntry]:
         mats: List[MaterialEntry] = []
         m: Optional[MaterialEntry] = None
         p: Optional[PropertyEntry] = None
+        auto_mode = "ALL"
 
         for raw in content.splitlines():
             line = raw.strip()
@@ -218,8 +363,10 @@ class TextListParser:
                 continue
             if line == "ENDMATERIAL":
                 if m:
+                    self._apply_templates(m, auto_mode)
                     mats.append(m)
                 m = None
+                auto_mode = "ALL"
                 continue
             if ":" not in line:
                 continue
@@ -234,6 +381,8 @@ class TextListParser:
                 m.material_class = val
             elif key == "SUBCLASS" and m:
                 m.subclass = val
+            elif key == "AUTO_PROPERTIES" and m:
+                auto_mode = val or "ALL"
             elif key == "PROPERTY":
                 p = PropertyEntry(name=val)
             elif key == "PQUAL" and p and "=" in val:
@@ -260,6 +409,7 @@ class TextListParser:
         if p and m:
             m.properties.append(p)
         if m:
+            self._apply_templates(m, auto_mode)
             mats.append(m)
         return mats
 

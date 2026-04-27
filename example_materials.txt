@@ -1,6 +1,7 @@
 MATERIAL: Aluminum 1100-H14
 DESCRIPTION: Commercially pure, great for forming
 CLASS: Metals
+AUTO_PROPERTIES: ALL
 PROPERTY: Density
 PQUAL: Field Variable Compatible=Temperature
 DEP: Density|kg m^-3|2710
