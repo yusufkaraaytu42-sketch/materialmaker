@@ -16,6 +16,14 @@ A lightweight Python GUI tool that helps you build an ANSYS Mechanical Engineeri
 python3 ansys_material_xml_bot.py
 ```
 
+## Optional CLI mode (no GUI)
+
+If you already have a text file with materials, you can generate XML directly:
+
+```bash
+python3 ansys_material_xml_bot.py --from-file materials_input_example.txt --output materials.xml
+```
+
 ## What it does
 
 - Prompts for required material fields in the GUI:
@@ -47,6 +55,10 @@ Rules:
 - `PROPERTY:` needs at least `name|value`.
 - `unit` and `temperature` are optional (`temperature` defaults to 23 C).
 - `END` closes the material block.
+
+If you see an error like `SyntaxError: unexpected token ':'` on a line such as
+`MATERIAL: Aluminum 6061-T6`, that means the text file is being interpreted as code by the wrong tool.
+Use this file as **input data** for this bot (GUI import or `--from-file` CLI mode), not as a Python script.
 
 ## Notes
 

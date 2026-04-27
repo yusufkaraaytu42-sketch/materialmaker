@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""GUI tool to build ANSYS EngineeringData XML material libraries.
+"""GUI/CLI tool to build ANSYS EngineeringData XML material libraries.
 
 Features:
 - Manual material entry through a Tkinter form.
 - Bulk import from a plain-text file.
-- Preview and save generated XML in EngineeringData format.
+- Optional CLI mode for text-file -> XML conversion.
+- Save generated XML in EngineeringData format.
 """
 from __future__ import annotations
 
+import argparse
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from dataclasses import dataclass, field
@@ -31,6 +33,121 @@ class MaterialItem:
     category: str = "User Materials"
     subclass: str = "Imported"
     properties: list[PropertyItem] = field(default_factory=list)
+
+
+def parse_material_text(raw_text: str) -> list[MaterialItem]:
+    """Parse MATERIAL blocks from plain text.
+
+    Supported directives:
+      MATERIAL, DESCRIPTION, CLASS, SUBCLASS, PROPERTY, END
+    """
+    # Some editors/tools copy escaped newlines literally; normalize those.
+    text = raw_text.replace("\\r\\n", "\n").replace("\\n", "\n")
+    lines = text.splitlines()
+
+    materials: list[MaterialItem] = []
+    current: MaterialItem | None = None
+
+    for idx, raw in enumerate(lines, start=1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+
+        upper = line.upper()
+        if upper.startswith("MATERIAL:"):
+            if current:
+                materials.append(current)
+            name = line.split(":", 1)[1].strip()
+            if not name:
+                raise ValueError(f"Line {idx}: MATERIAL name is required.")
+            current = MaterialItem(name=name)
+        elif current and upper.startswith("DESCRIPTION:"):
+            current.description = line.split(":", 1)[1].strip()
+        elif current and upper.startswith("CLASS:"):
+            current.category = line.split(":", 1)[1].strip() or current.category
+        elif current and upper.startswith("SUBCLASS:"):
+            current.subclass = line.split(":", 1)[1].strip() or current.subclass
+        elif current and upper.startswith("PROPERTY:"):
+            payload = line.split(":", 1)[1].strip()
+            parts = [x.strip() for x in payload.split("|")]
+            if len(parts) < 2 or not parts[0] or not parts[1]:
+                raise ValueError(
+                    f"Line {idx}: PROPERTY must be 'PROPERTY: Name|Value|Units|TemperatureC'."
+                )
+            while len(parts) < 4:
+                parts.append("")
+            current.properties.append(
+                PropertyItem(
+                    name=parts[0],
+                    value=parts[1],
+                    unit=parts[2],
+                    temperature_c=parts[3] or "23",
+                )
+            )
+        elif current and upper == "END":
+            materials.append(current)
+            current = None
+        elif ":" in line and not current:
+            raise ValueError(
+                f"Line {idx}: Found '{line}'. Start each block with 'MATERIAL: <name>'."
+            )
+        else:
+            raise ValueError(f"Line {idx}: Unrecognized input '{line}'.")
+
+    if current:
+        materials.append(current)
+
+    return materials
+
+
+def build_xml_tree(materials: list[MaterialItem]) -> ET.Element:
+    root = ET.Element("EngineeringData", version="25.2.0.233", versiondate="6/12/2025 11:41:00 AM")
+    ET.SubElement(root, "Notes")
+    materials_node = ET.SubElement(root, "Materials")
+    matml_doc = ET.SubElement(materials_node, "MatML_Doc")
+
+    for m in materials:
+        mat_node = ET.SubElement(matml_doc, "Material")
+        bulk = ET.SubElement(mat_node, "BulkDetails")
+
+        ET.SubElement(bulk, "Name").text = m.name
+        ET.SubElement(bulk, "Description").text = m.description
+
+        cls = ET.SubElement(bulk, "Class")
+        ET.SubElement(cls, "Name").text = m.category
+
+        sub = ET.SubElement(bulk, "Subclass")
+        ET.SubElement(sub, "Name").text = m.subclass
+
+        for i, p in enumerate(m.properties, start=1):
+            prop_tag = f"pr{i}"
+            pd = ET.SubElement(bulk, "PropertyData", property=prop_tag)
+            ET.SubElement(pd, "Data", format="string").text = "-"
+            ET.SubElement(pd, "Qualifier", name="Field Variable Compatible").text = "Temperature"
+
+            prop_name_param = ET.SubElement(pd, "ParameterValue", parameter=f"pa{i*10}", format="string")
+            ET.SubElement(prop_name_param, "Data").text = p.name
+
+            dep = ET.SubElement(pd, "ParameterValue", parameter=f"pa{i*10+1}", format="float")
+            ET.SubElement(dep, "Data").text = p.value
+            ET.SubElement(dep, "Qualifier", name="Variable Type").text = "Dependent"
+            if p.unit:
+                ET.SubElement(dep, "Qualifier", name="Units").text = p.unit
+
+            indep = ET.SubElement(pd, "ParameterValue", parameter=f"pa{i*10+2}", format="float")
+            ET.SubElement(indep, "Data").text = p.temperature_c
+            ET.SubElement(indep, "Qualifier", name="Variable Type").text = "Independent"
+            ET.SubElement(indep, "Qualifier", name="Field Variable").text = "Temperature"
+            ET.SubElement(indep, "Qualifier", name="Field Units").text = "C"
+
+    return root
+
+
+def write_xml(materials: list[MaterialItem], output_path: Path) -> None:
+    xml_root = build_xml_tree(materials)
+    raw = ET.tostring(xml_root, encoding="utf-8")
+    pretty = minidom.parseString(raw).toprettyxml(indent="  ")
+    output_path.write_text(pretty, encoding="utf-8")
 
 
 class MaterialXMLBot:
@@ -194,96 +311,15 @@ class MaterialXMLBot:
         if not path:
             return
 
-        added = 0
         try:
-            lines = Path(path).read_text(encoding="utf-8").splitlines()
-            current: MaterialItem | None = None
-            for raw in lines:
-                line = raw.strip()
-                if not line or line.startswith("#"):
-                    continue
-                if line.upper().startswith("MATERIAL:"):
-                    if current:
-                        self.materials.append(current)
-                        added += 1
-                    current = MaterialItem(name=line.split(":", 1)[1].strip())
-                elif current and line.upper().startswith("DESCRIPTION:"):
-                    current.description = line.split(":", 1)[1].strip()
-                elif current and line.upper().startswith("CLASS:"):
-                    current.category = line.split(":", 1)[1].strip() or current.category
-                elif current and line.upper().startswith("SUBCLASS:"):
-                    current.subclass = line.split(":", 1)[1].strip() or current.subclass
-                elif current and line.upper().startswith("PROPERTY:"):
-                    payload = line.split(":", 1)[1].strip()
-                    parts = [x.strip() for x in payload.split("|")]
-                    if len(parts) < 2:
-                        raise ValueError(f"Invalid PROPERTY line: {line}")
-                    while len(parts) < 4:
-                        parts.append("")
-                    p = PropertyItem(
-                        name=parts[0],
-                        value=parts[1],
-                        unit=parts[2],
-                        temperature_c=parts[3] or "23",
-                    )
-                    current.properties.append(p)
-                elif current and line.upper() == "END":
-                    self.materials.append(current)
-                    added += 1
-                    current = None
-
-            if current:
-                self.materials.append(current)
-                added += 1
-
-            for m in self.materials[-added:]:
+            parsed = parse_material_text(Path(path).read_text(encoding="utf-8"))
+            self.materials.extend(parsed)
+            for m in parsed:
                 self.material_list.insert(tk.END, f"{m.name} ({len(m.properties)} properties)")
 
-            messagebox.showinfo("Import complete", f"Imported {added} material(s).")
+            messagebox.showinfo("Import complete", f"Imported {len(parsed)} material(s).")
         except Exception as exc:
             messagebox.showerror("Import failed", str(exc))
-
-    def build_xml_tree(self) -> ET.Element:
-        root = ET.Element("EngineeringData", version="25.2.0.233", versiondate="6/12/2025 11:41:00 AM")
-        ET.SubElement(root, "Notes")
-        materials_node = ET.SubElement(root, "Materials")
-        matml_doc = ET.SubElement(materials_node, "MatML_Doc")
-
-        for m in self.materials:
-            mat_node = ET.SubElement(matml_doc, "Material")
-            bulk = ET.SubElement(mat_node, "BulkDetails")
-
-            ET.SubElement(bulk, "Name").text = m.name
-            ET.SubElement(bulk, "Description").text = m.description
-
-            cls = ET.SubElement(bulk, "Class")
-            ET.SubElement(cls, "Name").text = m.category
-
-            sub = ET.SubElement(bulk, "Subclass")
-            ET.SubElement(sub, "Name").text = m.subclass
-
-            for i, p in enumerate(m.properties, start=1):
-                prop_tag = f"pr{i}"
-                pd = ET.SubElement(bulk, "PropertyData", property=prop_tag)
-                ET.SubElement(pd, "Data", format="string").text = "-"
-                ET.SubElement(pd, "Qualifier", name="Field Variable Compatible").text = "Temperature"
-
-                prop_name_param = ET.SubElement(pd, "ParameterValue", parameter=f"pa{i*10}", format="string")
-                ET.SubElement(prop_name_param, "Data").text = p.name
-
-                dep = ET.SubElement(pd, "ParameterValue", parameter=f"pa{i*10+1}", format="float")
-                ET.SubElement(dep, "Data").text = p.value
-                ET.SubElement(dep, "Qualifier", name="Variable Type").text = "Dependent"
-                if p.unit:
-                    ET.SubElement(dep, "Qualifier", name="Units").text = p.unit
-
-                indep = ET.SubElement(pd, "ParameterValue", parameter=f"pa{i*10+2}", format="float")
-                ET.SubElement(indep, "Data").text = p.temperature_c
-                ET.SubElement(indep, "Qualifier", name="Variable Type").text = "Independent"
-                ET.SubElement(indep, "Qualifier", name="Field Variable").text = "Temperature"
-                ET.SubElement(indep, "Qualifier", name="Field Units").text = "C"
-
-        return root
 
     def save_xml(self) -> None:
         if not self.materials:
@@ -298,14 +334,25 @@ class MaterialXMLBot:
         if not out:
             return
 
-        xml_root = self.build_xml_tree()
-        raw = ET.tostring(xml_root, encoding="utf-8")
-        pretty = minidom.parseString(raw).toprettyxml(indent="  ")
-        Path(out).write_text(pretty, encoding="utf-8")
+        write_xml(self.materials, Path(out))
         messagebox.showinfo("Saved", f"XML file saved:\n{out}")
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Build ANSYS EngineeringData XML from GUI or text input.")
+    parser.add_argument("--from-file", dest="from_file", help="Text file with MATERIAL blocks.")
+    parser.add_argument("--output", dest="output", help="Output XML path (required with --from-file).")
+    args = parser.parse_args()
+
+    if args.from_file:
+        if not args.output:
+            raise SystemExit("Error: --output is required when using --from-file.")
+        text = Path(args.from_file).read_text(encoding="utf-8")
+        mats = parse_material_text(text)
+        write_xml(mats, Path(args.output))
+        print(f"Wrote {len(mats)} material(s) to {args.output}")
+        return
+
     root = tk.Tk()
     MaterialXMLBot(root)
     root.mainloop()

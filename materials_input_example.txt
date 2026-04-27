@@ -20,3 +20,12 @@ PROPERTY: Density|1180|kg m^-3|23
 PROPERTY: Young's Modulus|3.1e9|Pa|23
 PROPERTY: Poisson Ratio|0.35||23
 END
+
+MATERIAL: Aluminum 6061-T6
+DESCRIPTION: Common structural aluminum alloy.
+CLASS: Solids
+SUBCLASS: Metals
+PROPERTY: Density|2700|kg m^-3|23
+PROPERTY: Young's Modulus|6.89e10|Pa|23
+PROPERTY: Poisson Ratio|0.33||23
+END
