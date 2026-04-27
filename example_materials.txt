@@ -1,0 +1,22 @@
+# Example input for material_xml_gui.py
+
+MATERIAL: Air, gas
+DESCRIPTION: Dry air sample for demonstration
+CLASS: Fluids
+SUBCLASS: Gases
+
+PROPERTY: Density
+DEPENDENT: Density|kg m^-3|1.16,1.00,0.95
+INDEPENDENT: Temperature|C|23,100,150
+QUALIFIER: Behavior=Isotropic
+INTERPOLATION: Linear Multivariate (Qhull)
+EXTRAPOLATION: Projection to the Bounding Box
+ENDPROPERTY
+
+PROPERTY: Viscosity
+DEPENDENT: Dynamic Viscosity|Pa s|1.832e-05,2.17e-05,2.60e-05
+INDEPENDENT: Temperature|C|23,100,200
+QUALIFIER: Behavior=Isotropic
+ENDPROPERTY
+
+ENDMATERIAL
