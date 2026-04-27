@@ -1,31 +1,19 @@
-# Example batch file for ansys_material_xml_bot.py
-# One MATERIAL block per material. PROPERTY format:
-# PROPERTY: Property Name|Value|Units|TemperatureC
+# Electromagnetic material format for ansys_material_xml_bot.py
+# Required blocks:
+# MATERIAL, BH_B, BH_H, COLOR, END
+# Optional:
+# CLASS, GUID
 
-MATERIAL: Air, gas
-DESCRIPTION: Gas, Air data for a simple simulation setup.
-CLASS: Fluids
-SUBCLASS: Gases
-PROPERTY: Density|1.16|kg m^-3|23
-PROPERTY: Dynamic Viscosity|1.832e-05|Pa s|23
-PROPERTY: Thermal Conductivity|0.02582|W m^-1 C^-1|23
-PROPERTY: Specific Heat|1021|J kg^-1 C^-1|23
+MATERIAL: Cold Rolled low carbon strip steel
+CLASS: Electromagnetic
+BH_B: 0,0.86,1.12,1.23,1.32,1.49,1.61,1.68,1.73,1.77,1.89,1.98,2.02,2.045,2.135,2.304,2.634,3
+BH_H: 0,317.4,476.2,634.9,793.7,1507,3175,4762,6349,7937,15873,31746,47619,63492,126984,253963,507936,793651
+COLOR: 181,168,168
 END
 
-MATERIAL: Custom Epoxy
-DESCRIPTION: Example custom resin for testing.
-CLASS: Solids
-SUBCLASS: Polymers
-PROPERTY: Density|1180|kg m^-3|23
-PROPERTY: Young's Modulus|3.1e9|Pa|23
-PROPERTY: Poisson Ratio|0.35||23
-END
-
-MATERIAL: Aluminum 6061-T6
-DESCRIPTION: Common structural aluminum alloy.
-CLASS: Solids
-SUBCLASS: Metals
-PROPERTY: Density|2700|kg m^-3|23
-PROPERTY: Young's Modulus|6.89e10|Pa|23
-PROPERTY: Poisson Ratio|0.33||23
+MATERIAL: Silicon Core Iron
+CLASS: Electromagnetic
+BH_B: 0,0.2,0.4,0.55,1.15,1.3,1.4,1.55,1.635,1.655,1.675,1.6925
+BH_H: 0,59.5238,119.048,158.73,396.825,555.556,793.651,1587.3,3968.25,7936.51,15873,31746
+COLOR: 130,177,176
 END

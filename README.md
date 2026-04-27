@@ -1,66 +1,45 @@
-# ANSYS Material XML Bot
+# ANSYS Electromagnetic Material XML Bot
 
-A lightweight Python GUI tool that helps you build an ANSYS Mechanical Engineering Data XML file from:
+This tool generates ANSYS `EngineeringData` XML in the same structure you shared:
 
-1. **Manual input** (one material at a time), and/or
-2. **Batch text file input** (many materials at once).
+- `PropertyData property="pr0"` = **B-H Curve** (`pa0` dependent B list, `pa1` independent H list)
+- `PropertyData property="pr1"` = **Material Unique Id** (`guid`, `Display=False`)
+- `PropertyData property="pr2"` = **Color** (`pa2`, `pa3`, `pa4`, and `pa5=Appearance`)
+- Global `<Metadata>` with `pa0..pa5` and `pr0..pr2` definitions
 
-## Requirements
-
-- Python 3.10+
-- Tkinter (included in most standard Python installs)
-
-## Run
+## Run (GUI)
 
 ```bash
 python3 ansys_material_xml_bot.py
 ```
 
-## Optional CLI mode (no GUI)
-
-If you already have a text file with materials, you can generate XML directly:
+## Run (CLI)
 
 ```bash
 python3 ansys_material_xml_bot.py --from-file materials_input_example.txt --output materials.xml
 ```
 
-## What it does
+## Text Input Format
 
-- Prompts for required material fields in the GUI:
-  - Material name
-  - Description
-  - Class
-  - Subclass
-  - Property rows (name, value, unit, temperature)
-- Lets you add each material to an in-memory queue.
-- Imports additional materials from a `.txt` file.
-- Exports all queued materials to one ANSYS-style XML document that you can upload/import.
-
-## Batch text file format
-
-Use the provided `materials_input_example.txt` as a template.
+Use `materials_input_example.txt` as template:
 
 ```text
-MATERIAL: Material Name
-DESCRIPTION: Optional description
-CLASS: Fluids
-SUBCLASS: Gases
-PROPERTY: Density|1.16|kg m^-3|23
-PROPERTY: Dynamic Viscosity|1.832e-05|Pa s|23
+MATERIAL: Material name
+CLASS: Electromagnetic
+BH_B: 0,0.86,1.12
+BH_H: 0,317.4,476.2
+COLOR: 181,168,168
+GUID: optional-guid
 END
 ```
 
 Rules:
-- `MATERIAL:` starts a new material block.
-- `PROPERTY:` needs at least `name|value`.
-- `unit` and `temperature` are optional (`temperature` defaults to 23 C).
-- `END` closes the material block.
+- `BH_B` and `BH_H` must have the same number of comma-separated points.
+- `COLOR` is `R,G,B`.
+- `GUID` is optional (auto-generated if missing).
+- `CLASS` defaults to `Electromagnetic`.
 
-If you see an error like `SyntaxError: unexpected token ':'` on a line such as
-`MATERIAL: Aluminum 6061-T6`, that means the text file is being interpreted as code by the wrong tool.
-Use this file as **input data** for this bot (GUI import or `--from-file` CLI mode), not as a Python script.
+## Why this fixes your issue
 
-## Notes
-
-- The tool generates an `EngineeringData` XML structure with `Material/BulkDetails/PropertyData` entries.
-- Property IDs (`pr1`, `pr2`, …) and parameter IDs are generated automatically.
+Your provided XML format uses fixed property/parameter IDs (`pr0..pr2`, `pa0..pa5`) and metadata.
+This bot now emits that exact structure instead of a generic property schema.
