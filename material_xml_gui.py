@@ -371,6 +371,23 @@ class App(tk.Tk):
             data[k] = v
         return data
 
+    @staticmethod
+    def _material_issues(material: MaterialEntry) -> List[str]:
+        observed = set()
+        for prop in material.properties:
+            observed.add(prop.name.casefold())
+            for dep in prop.dependent_series:
+                observed.add(dep.name.casefold())
+
+        issues: List[str] = []
+        if not any("density" in n for n in observed):
+            issues.append("missing Density")
+        if not any("young" in n and "modulus" in n for n in observed):
+            issues.append("missing Young's Modulus")
+        if not any("poisson" in n and "ratio" in n for n in observed):
+            issues.append("missing Poisson's Ratio")
+        return issues
+
     def clear_property_inputs(self) -> None:
         self.prop_name.set("")
         self.option_name.set("Options Variable")
@@ -458,6 +475,36 @@ class App(tk.Tk):
         if not self.materials:
             messagebox.showerror("Nothing to export", "No saved materials")
             return
+
+        # Duplicate-name guard: Mechanical often exposes only one when duplicates exist.
+        seen: Dict[str, int] = {}
+        duplicates: List[str] = []
+        for m in self.materials:
+            key = m.name.casefold()
+            seen[key] = seen.get(key, 0) + 1
+        for m in self.materials:
+            if seen[m.name.casefold()] > 1 and m.name not in duplicates:
+                duplicates.append(m.name)
+        if duplicates:
+            messagebox.showerror(
+                "Duplicate material names",
+                "Duplicate names found (fix before export):\\n- " + "\\n- ".join(duplicates),
+            )
+            return
+
+        # Usability warning: materials missing basic linear-elastic trio are commonly hidden in Mechanical.
+        issue_lines: List[str] = []
+        for m in self.materials:
+            issues = self._material_issues(m)
+            if issues:
+                issue_lines.append(f"{m.name}: {', '.join(issues)}")
+        if issue_lines:
+            proceed = messagebox.askyesno(
+                "Potentially unusable materials",
+                "Some materials may not appear in Mechanical:\n\n- " + "\n- ".join(issue_lines) + "\n\nExport anyway?",
+            )
+            if not proceed:
+                return
 
         out = filedialog.asksaveasfilename(defaultextension=".xml", filetypes=[("XML", "*.xml")])
         if not out:

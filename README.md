@@ -23,6 +23,7 @@ Supported sections:
 - `load_from_xml(filepath: str) -> MaterialDatabase`
 - `to_json(material_db, filepath: str)`
 - `get_material(material_db, name: str) -> Optional[Material]`
+- `validate_for_mechanical(material_db) -> dict` (heuristic report for missing core properties + duplicates)
 - `evaluate_property(material, prop_name, **field_vars) -> float` (basic helper)
 
 ## Quick usage
@@ -64,6 +65,7 @@ The GUI now builds XML in the same structural style as your real files:
 - `<Materials><MatML_Doc>...`
 - material blocks with `<BulkDetails>` and repeated `<PropertyData>`
 - generated `<Metadata>` with `ParameterDetails` / `PropertyDetails` IDs (`pa0...`, `pr0...`)
+- export-time validation for duplicate material names and warnings for materials missing Density / Young's Modulus / Poisson's Ratio
 
 Property editor supports:
 

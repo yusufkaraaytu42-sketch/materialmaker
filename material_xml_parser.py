@@ -88,6 +88,7 @@ class MaterialProperty:
     extrapolation: Optional[str] = None
     values: List[PropertyPoint] = field(default_factory=list)
     parameter_qualifiers: Dict[str, Dict[str, str]] = field(default_factory=dict)
+    dependent_parameter_names: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -123,6 +124,49 @@ class MaterialDatabase:
         if filepath:
             Path(filepath).write_text(payload, encoding="utf-8")
         return payload
+
+    def validate_for_mechanical(self) -> Dict[str, Any]:
+        """Heuristic checks to explain why Mechanical may expose fewer materials."""
+        seen: Dict[str, int] = {}
+        for m in self.materials:
+            key = m.name.casefold()
+            seen[key] = seen.get(key, 0) + 1
+        duplicate_names = [m.name for m in self.materials if seen[m.name.casefold()] > 1]
+
+        unique_duplicate_names: List[str] = []
+        for name in duplicate_names:
+            if name not in unique_duplicate_names:
+                unique_duplicate_names.append(name)
+
+        issues_by_material: Dict[str, List[str]] = {}
+        usable: List[str] = []
+
+        for m in self.materials:
+            observed_names = set()
+            for p in m.properties.values():
+                observed_names.add(p.name.casefold())
+                for dep in p.dependent_parameter_names:
+                    observed_names.add(dep.casefold())
+
+            missing: List[str] = []
+            if not any("density" in n for n in observed_names):
+                missing.append("missing Density")
+            if not any("young" in n and "modulus" in n for n in observed_names):
+                missing.append("missing Young's Modulus")
+            if not any("poisson" in n and "ratio" in n for n in observed_names):
+                missing.append("missing Poisson's Ratio")
+
+            if missing:
+                issues_by_material[m.name] = missing
+            else:
+                usable.append(m.name)
+
+        return {
+            "total_materials": len(self.materials),
+            "usable_materials": usable,
+            "issues_by_material": issues_by_material,
+            "duplicate_names": unique_duplicate_names,
+        }
 
 
 def _parse_metadata(matml_doc: ET.Element) -> Tuple[Dict[str, Dict[str, Any]], Dict[str, str]]:
@@ -266,6 +310,7 @@ def _parse_property_data(
             extrapolation=extrapolation,
             values=[],
             parameter_qualifiers=parameter_qualifiers,
+            dependent_parameter_names=[],
         )
 
     points_count = len(dependent_series[0]["values"])
@@ -315,6 +360,7 @@ def _parse_property_data(
         extrapolation=extrapolation,
         values=points,
         parameter_qualifiers=parameter_qualifiers,
+        dependent_parameter_names=[series["name"] for series in dependent_series],
     )
 
 
@@ -353,6 +399,10 @@ def to_json(material_db: MaterialDatabase, filepath: str) -> None:
 
 def get_material(material_db: MaterialDatabase, name: str) -> Optional[Material]:
     return material_db.get_material(name)
+
+
+def validate_for_mechanical(material_db: MaterialDatabase) -> Dict[str, Any]:
+    return material_db.validate_for_mechanical()
 
 
 def evaluate_property(material: Material, prop_name: str, **field_vars: float) -> float:
@@ -412,5 +462,6 @@ __all__ = [
     "load_from_xml",
     "to_json",
     "get_material",
+    "validate_for_mechanical",
     "evaluate_property",
 ]
