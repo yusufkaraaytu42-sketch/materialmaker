@@ -190,9 +190,7 @@ def _parse_property_data(
         # Keep behavior configurable by caller if needed; default keeps the property.
         pass
 
-    dependent_values: Optional[List[Any]] = None
-    dependent_qualifiers: Dict[str, str] = {}
-    dependent_unit: Optional[str] = None
+    dependent_series: List[Dict[str, Any]] = []
     independent_series: List[Dict[str, Any]] = []
 
     interpolation = None
@@ -206,8 +204,13 @@ def _parse_property_data(
         qualifiers = _read_qualifiers(pv)
         parameter_qualifiers[parameter_id] = qualifiers
 
-        # Interpolation options node
-        if parameter_id == "pa6":
+        # Interpolation options can appear on pa6, but pa6 can also be regular data in some files.
+        is_interpolation_node = (
+            "AlgorithmType" in qualifiers
+            or "ExtrapolationType" in qualifiers
+            or (parameter_id == "pa6" and raw_data == "Interpolation Options")
+        )
+        if is_interpolation_node:
             interpolation = qualifiers.get("AlgorithmType", interpolation)
             extrapolation = qualifiers.get("ExtrapolationType", extrapolation)
             continue
@@ -225,14 +228,20 @@ def _parse_property_data(
             role = "dependent"
         else:
             # Fallback behavior for malformed files.
-            role = "dependent" if dependent_values is None else "independent"
+            role = "dependent" if not dependent_series else "independent"
 
         pmeta = param_lookup.get(parameter_id, {"name": parameter_id, "unit": None})
 
         if role == "dependent":
-            dependent_values = values
-            dependent_qualifiers = qualifiers
-            dependent_unit = pmeta.get("unit")
+            dependent_series.append(
+                {
+                    "id": parameter_id,
+                    "name": pmeta.get("name") or parameter_id,
+                    "unit": pmeta.get("unit"),
+                    "values": values,
+                    "qualifiers": qualifiers,
+                }
+            )
         else:
             field_name = qualifiers.get("Field Variable") or pmeta.get("name") or parameter_id
             field_unit = qualifiers.get("Field Units") or pmeta.get("unit")
@@ -247,10 +256,25 @@ def _parse_property_data(
                 }
             )
 
-    if dependent_values is None:
-        raise ValueError(f"Property '{prop_name}' has no dependent series.")
+    if not dependent_series:
+        # Internal/metadata-like property with no data points.
+        return MaterialProperty(
+            name=prop_name,
+            unit=None,
+            qualifiers=property_qualifiers,
+            interpolation=interpolation,
+            extrapolation=extrapolation,
+            values=[],
+            parameter_qualifiers=parameter_qualifiers,
+        )
 
-    points_count = len(dependent_values)
+    points_count = len(dependent_series[0]["values"])
+    for series in dependent_series[1:]:
+        if len(series["values"]) != points_count:
+            raise ValueError(
+                f"Length mismatch in '{prop_name}': dependent '{dependent_series[0]['name']}' has "
+                f"{points_count}, '{series['name']}' has {len(series['values'])}."
+            )
     for series in independent_series:
         if len(series["values"]) != points_count:
             raise ValueError(
@@ -260,6 +284,11 @@ def _parse_property_data(
 
     points: List[PropertyPoint] = []
     for idx in range(points_count):
+        if len(dependent_series) == 1:
+            dependent_value: Any = dependent_series[0]["values"][idx]
+        else:
+            dependent_value = {series["name"]: series["values"][idx] for series in dependent_series}
+
         indep_values = [
             IndependentValue(
                 name=series["name"],
@@ -270,15 +299,17 @@ def _parse_property_data(
             )
             for series in independent_series
         ]
-        points.append(PropertyPoint(dependent=dependent_values[idx], independent=indep_values))
+        points.append(PropertyPoint(dependent=dependent_value, independent=indep_values))
 
-    # Merge dependent qualifiers only if absent at property level.
-    for key, value in dependent_qualifiers.items():
+    # Merge first dependent qualifiers only if absent at property level.
+    for key, value in dependent_series[0]["qualifiers"].items():
         property_qualifiers.setdefault(key, value)
+
+    prop_unit = dependent_series[0]["unit"] if len(dependent_series) == 1 else None
 
     return MaterialProperty(
         name=prop_name,
-        unit=dependent_unit,
+        unit=prop_unit,
         qualifiers=property_qualifiers,
         interpolation=interpolation,
         extrapolation=extrapolation,
@@ -335,6 +366,11 @@ def evaluate_property(material: Material, prop_name: str, **field_vars: float) -
     prop = material.properties[prop_name]
     if not prop.values:
         raise ValueError(f"Property '{prop_name}' has no data points.")
+    if isinstance(prop.values[0].dependent, dict):
+        raise ValueError(
+            f"Property '{prop_name}' has multiple dependent parameters; "
+            "automatic scalar evaluation is ambiguous."
+        )
 
     indep_dim = len(prop.values[0].independent)
     if indep_dim == 0:

@@ -16,6 +16,7 @@ Supported sections:
 - metadata units (`<Units>/<Unit power="...">`, `<Unitless/>`)
 - qualifiers at property and parameter level
 - interpolation/extrapolation options from `pa6`
+- `pa6` values used as normal data (e.g., `Appearance`) are not treated as interpolation nodes unless interpolation qualifiers are present
 
 ## API
 
@@ -45,3 +46,4 @@ print(db.to_json())
 ## Example files
 
 - `example_engineering_data.xml`: sample XML for smoke testing.
+- `example_hyperelastic.xml`: sample matching real hyperelastic-style structure with multi-independent data and multiple dependent scalar parameters.

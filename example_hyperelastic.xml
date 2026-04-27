@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EngineeringData version="25.2.0.233" versiondate="6/12/2025 11:41:00 AM">
+  <Notes/>
+  <Materials>
+    <MatML_Doc>
+      <Material>
+        <BulkDetails>
+          <Name>Elastomer Sample (Neo-Hookean)</Name>
+          <Description>Sample data to model as Neo-Hookean</Description>
+          <Class><Name>Hyperelastic</Name></Class>
+
+          <PropertyData property="pr0">
+            <Data format="string">-</Data>
+            <ParameterValue parameter="pa0" format="float">
+              <Data>142032.056,288890.444,386796.036</Data>
+              <Qualifier name="Variable Type">Dependent,Dependent,Dependent</Qualifier>
+            </ParameterValue>
+            <ParameterValue parameter="pa1" format="float">
+              <Data>0.134,0.268,0.357</Data>
+              <Qualifier name="Variable Type">Independent,Independent,Independent</Qualifier>
+              <Qualifier name="Field Variable">Stretch Ratio</Qualifier>
+            </ParameterValue>
+            <ParameterValue parameter="pa2" format="float">
+              <Data>7.88e-31,7.88e-31,7.88e-31</Data>
+              <Qualifier name="Variable Type">Independent,Independent,Independent</Qualifier>
+              <Qualifier name="Field Variable">Temperature</Qualifier>
+              <Qualifier name="Field Units">C</Qualifier>
+            </ParameterValue>
+          </PropertyData>
+
+          <PropertyData property="pr2">
+            <Data format="string">-</Data>
+            <ParameterValue parameter="pa3" format="float">
+              <Data>130</Data>
+              <Qualifier name="Variable Type">Dependent</Qualifier>
+            </ParameterValue>
+            <ParameterValue parameter="pa4" format="float">
+              <Data>181</Data>
+              <Qualifier name="Variable Type">Dependent</Qualifier>
+            </ParameterValue>
+            <ParameterValue parameter="pa5" format="float">
+              <Data>143</Data>
+              <Qualifier name="Variable Type">Dependent</Qualifier>
+            </ParameterValue>
+            <ParameterValue parameter="pa6" format="string">
+              <Data>Appearance</Data>
+            </ParameterValue>
+          </PropertyData>
+        </BulkDetails>
+      </Material>
+
+      <Metadata>
+        <ParameterDetails id="pa0"><Name>Nominal Stress</Name><Units><Unit><Name>Pa</Name></Unit></Units></ParameterDetails>
+        <ParameterDetails id="pa1"><Name>Stretch Ratio</Name><Unitless/></ParameterDetails>
+        <ParameterDetails id="pa2"><Name>Temperature</Name><Units><Unit><Name>C</Name></Unit></Units></ParameterDetails>
+        <ParameterDetails id="pa3"><Name>Shore A Hardness</Name><Unitless/></ParameterDetails>
+        <ParameterDetails id="pa4"><Name>Shore D Hardness</Name><Unitless/></ParameterDetails>
+        <ParameterDetails id="pa5"><Name>Tensile Strength</Name><Units><Unit><Name>MPa</Name></Unit></Units></ParameterDetails>
+        <ParameterDetails id="pa6"><Name>Appearance</Name><Unitless/></ParameterDetails>
+
+        <PropertyDetails id="pr0"><Name>Uniaxial Test Data</Name></PropertyDetails>
+        <PropertyDetails id="pr2"><Name>Physical Properties</Name></PropertyDetails>
+      </Metadata>
+    </MatML_Doc>
+  </Materials>
+</EngineeringData>
