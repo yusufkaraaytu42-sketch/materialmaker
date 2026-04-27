@@ -1,0 +1,3059 @@
+MATERIAL: Aluminum 1100-H14
+DESCRIPTION: Commercially pure, great for forming
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2710
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|6.89e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 2014-T6
+DESCRIPTION: High-strength forging alloy, used in aerospace structures
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.30e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 2024-T3
+DESCRIPTION: Aerospace alloy, excellent fatigue resistance
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2780
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.31e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 5052-H32
+DESCRIPTION: Marine-grade, good corrosion resistance
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2680
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.03e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 5083-H116
+DESCRIPTION: Marine grade aluminum, used in cryogenic tanks
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2660
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.10e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 6061-T6
+DESCRIPTION: Wrought aluminum, common for airframes and tanks
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2700
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|6.89e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 6063-T5
+DESCRIPTION: Architectural aluminum, good for extrusions
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2700
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|6.89e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 6063-T6
+DESCRIPTION: Heat-treated architectural aluminum
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2700
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|6.89e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 7075-T6
+DESCRIPTION: High-strength aluminum alloy for critical structures
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2810
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.17e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 7079-T6
+DESCRIPTION: High-strength aluminum, used in aircraft forgings
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2820
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.17e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Aluminum 8090 (Al-Li)
+DESCRIPTION: Aluminum-lithium alloy, very low density
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2540
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.90e10
+DEP: Poisson's Ratio||0.33
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Magnesium AZ31B
+DESCRIPTION: Lightweight magnesium alloy for weight-critical parts
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1770
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.50e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Magnesium AZ61A
+DESCRIPTION: Moderate strength magnesium alloy
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.50e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Magnesium ZK60A
+DESCRIPTION: High-strength magnesium alloy
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1830
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.50e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium CP Grade 1
+DESCRIPTION: Commercially pure, soft and formable
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4510
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.05e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium CP Grade 2
+DESCRIPTION: Commercially pure titanium, corrosion resistant
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4510
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.05e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium CP Grade 3
+DESCRIPTION: Medium-strength commercial purity
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4510
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.05e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium CP Grade 4
+DESCRIPTION: Highest strength commercially pure titanium
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4510
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.05e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium Ti-6Al-4V
+DESCRIPTION: High strength-to-weight ratio titanium alloy for engine parts and pressure vessels
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4430
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.14e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium Ti-5Al-2.5Sn
+DESCRIPTION: Alpha alloy for high-temperature applications
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4480
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.10e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium Ti-6Al-2Sn-4Zr-2Mo
+DESCRIPTION: High-temperature titanium alloy
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4540
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.13e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium Ti-15V-3Cr-3Sn-3Al
+DESCRIPTION: Beta titanium for cold forming
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4770
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.03e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Titanium Beta-C
+DESCRIPTION: Metastable beta alloy, high strength
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|4810
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.07e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel 1018 (Mild Steel)
+DESCRIPTION: General purpose low carbon steel
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7870
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel 1045
+DESCRIPTION: Medium carbon steel, good strength
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7870
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel 1095
+DESCRIPTION: High carbon steel, spring applications
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel A36
+DESCRIPTION: Structural carbon steel for launch pads and ground support
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel 4130 (Chromoly)
+DESCRIPTION: Chrome-moly steel, high strength-to-weight, aircraft tubing
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel 4140
+DESCRIPTION: Alloy steel for high-strength hardware
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Steel 4340
+DESCRIPTION: High-strength alloy steel for critical hardware
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 301 (Full Hard)
+DESCRIPTION: High strength stainless, spring temper
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8030
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.93e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 304
+DESCRIPTION: Common austenitic stainless steel, corrosion resistant
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.93e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 310
+DESCRIPTION: High-temperature stainless steel
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7980
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 316
+DESCRIPTION: Marine grade stainless steel
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7990
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.93e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 321
+DESCRIPTION: Titanium-stabilized stainless for high temperature
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8020
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.93e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 347
+DESCRIPTION: Columbium-stabilized for high-temperature service
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8030
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.93e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 410
+DESCRIPTION: Martensitic stainless, heat treatable
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e11
+DEP: Poisson's Ratio||0.28
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Stainless Steel 17-4PH
+DESCRIPTION: Precipitation-hardening stainless, high strength
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.97e11
+DEP: Poisson's Ratio||0.28
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Maraging Steel C250
+DESCRIPTION: Ultra-high-strength maraging steel
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.86e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Maraging Steel C300
+DESCRIPTION: Very high strength maraging steel for rocket cases
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.86e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Beryllium (Be)
+DESCRIPTION: Very light, stiff metal (high cost), used in specialized aerospace
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.87e11
+DEP: Poisson's Ratio||0.03
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Beryllium Copper C17200
+DESCRIPTION: High strength, non-sparking, used for spring contacts
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8250
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.27e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Brass C260 (Cartridge Brass)
+DESCRIPTION: 70/30 brass, good machinability
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8530
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.10e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Brass C360 (Free Cutting)
+DESCRIPTION: Leaded brass for precision machined parts
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8500
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.05e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Copper C110 (ETP)
+DESCRIPTION: Electrolytic tough pitch copper, high conductivity
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8960
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.10e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Copper C101 (Oxygen-Free)
+DESCRIPTION: High purity copper for electronics
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8940
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.17e11
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Inconel 625
+DESCRIPTION: Superalloy for high-temperature engine parts
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8440
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.05e11
+DEP: Poisson's Ratio||0.31
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Inconel 718
+DESCRIPTION: Precipitation-hardened superalloy for high-temperature hardware
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8190
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Inconel X-750
+DESCRIPTION: High-temperature alloy for springs and bolts
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8280
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.14e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Lead (Pb)
+DESCRIPTION: High density metal used for ballast and counterweights
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|11340
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.60e10
+DEP: Poisson's Ratio||0.44
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Monel 400
+DESCRIPTION: Nickel-copper alloy, corrosion resistant
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.79e11
+DEP: Poisson's Ratio||0.32
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Monel K-500
+DESCRIPTION: Precipitation-hardened Monel for high strength
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|8440
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.79e11
+DEP: Poisson's Ratio||0.32
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Tungsten (W)
+DESCRIPTION: Very high density, used for counterweights and ballast
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|19250
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.11e11
+DEP: Poisson's Ratio||0.28
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Tungsten Heavy Alloy (W-Ni-Fe)
+DESCRIPTION: Sintered tungsten alloy for precision ballast
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|17000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.10e11
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Cast Iron (Gray)
+DESCRIPTION: Used for launch pads, rail stands, or ballast
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.10e11
+DEP: Poisson's Ratio||0.26
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Ductile Iron (Nodular)
+DESCRIPTION: High-strength cast iron for hardware
+CLASS: Metals
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7300
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.70e11
+DEP: Poisson's Ratio||0.28
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: ABS (Acrylonitrile Butadiene Styrene)
+DESCRIPTION: Common thermoplastic for 3D printed parts, durable
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1040
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.30e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Acrylic (PMMA)
+DESCRIPTION: Transparent plastic for canopies and payload bays
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1190
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.20e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Acrylonitrile Styrene Acrylate (ASA)
+DESCRIPTION: UV-resistant alternative to ABS for outdoor use
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1070
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.20e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Delrin (Acetal / POM)
+DESCRIPTION: Low friction, high stiffness, used for rail buttons and bushings
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1410
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.10e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: HDPE (High-Density Polyethylene)
+DESCRIPTION: High density polyethylene, used for cutting boards and sleds
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|950
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.42
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: LDPE (Low-Density Polyethylene)
+DESCRIPTION: Flexible plastic for bags and liners
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|920
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e8
+DEP: Poisson's Ratio||0.44
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nylon 6
+DESCRIPTION: Engineering plastic, tough and wear-resistant
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1140
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.80e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nylon 6/6
+DESCRIPTION: Most common nylon for structural parts
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1140
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.80e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nylon 12
+DESCRIPTION: Flexible nylon for powder bed fusion (SLS) printing
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1010
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.70e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PEEK
+DESCRIPTION: High-performance thermoplastic for high-temperature parts
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1320
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.60e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PEI (Ultem)
+DESCRIPTION: High-strength thermoplastic for custom parts
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1270
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.20e9
+DEP: Poisson's Ratio||0.36
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PETG
+DESCRIPTION: Polyethylene terephthalate glycol, durable and clear
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1270
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PLA (Polylactic Acid)
+DESCRIPTION: Bioplastic, common for 3D printing prototypes
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1240
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.50e9
+DEP: Poisson's Ratio||0.36
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polycarbonate (PC)
+DESCRIPTION: High impact resistance, used for clear tubes and canopies
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.40e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polypropylene (PP)
+DESCRIPTION: Flexible thermoplastic for hinges and containers
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|910
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e9
+DEP: Poisson's Ratio||0.43
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polystyrene (PS)
+DESCRIPTION: Rigid, brittle plastic for low-cost prototyping
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1050
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.00e9
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PTFE (Teflon)
+DESCRIPTION: Low friction, chemically inert for bushings and seals
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e8
+DEP: Poisson's Ratio||0.46
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PVC (Polyvinyl Chloride)
+DESCRIPTION: Rigid plastic for plumbing and structures
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1380
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.90e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PVDF (Kynar)
+DESCRIPTION: Fluoropolymer with high chemical resistance
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1780
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: TPU (Thermoplastic Polyurethane)
+DESCRIPTION: Flexible filament for shock-absorbing parts
+CLASS: Plastics
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.60e7
+DEP: Poisson's Ratio||0.48
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Blue Tube (Phenolic-impregnated paper)
+DESCRIPTION: High-strength paper tube for rocketry airframes
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.20e10
+DEP: Poisson's Ratio||0.25
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Carbon Fiber (UD, 60% fiber)
+DESCRIPTION: Unidirectional carbon/epoxy for high-stiffness parts
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1600
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.30e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Carbon Fiber (Plain Weave)
+DESCRIPTION: Woven carbon fabric for tubes and plates
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1580
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Carbon Fiber (Twill Weave)
+DESCRIPTION: Aesthetic twill weave for high-performance parts
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1600
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|6.50e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: E-Glass / Epoxy (Woven)
+DESCRIPTION: Fiberglass cloth in epoxy matrix, common for tubes
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.50e10
+DEP: Poisson's Ratio||0.22
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: E-Glass / Polyester
+DESCRIPTION: Low-cost fiberglass for structural parts
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e10
+DEP: Poisson's Ratio||0.22
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Fiberglass (S-Glass)
+DESCRIPTION: Higher-strength fiberglass for demanding parts
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2500
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.50e10
+DEP: Poisson's Ratio||0.22
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: FR-4 (G-10 Fiberglass)
+DESCRIPTION: Woven glass/epoxy laminate for electronics and fins
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.85e10
+DEP: Poisson's Ratio||0.20
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Kevlar 29 / Epoxy
+DESCRIPTION: Aramid fiber composite, impact-resistant
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1380
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.00e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Kevlar 49 / Epoxy
+DESCRIPTION: High-modulus aramid composite for strength
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1380
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.60e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nomex Honeycomb Core
+DESCRIPTION: Aramid paper honeycomb for sandwich panels
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|48
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.00e6
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Phenolic Canvas (Micarta)
+DESCRIPTION: Linen or canvas phenolic composite for electrical and mechanical parts
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1370
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Phenolic Linen (XX Grade)
+DESCRIPTION: Phenolic linen laminate for high-strength electrical parts
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1360
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.20e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Phenolic Paper (XXX Grade)
+DESCRIPTION: Paper-based phenolic for electrical insulation
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1350
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Quantum Tube
+DESCRIPTION: Phenolic overwrap tubing, stiff and strong
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1300
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: S-Glass / Epoxy
+DESCRIPTION: High-strength fiberglass composite
+CLASS: Composites
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.80e10
+DEP: Poisson's Ratio||0.22
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Balsa Wood (Light, 8 lb/cu ft)
+DESCRIPTION: Very lightweight wood for fins and nose cones
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|128
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.50e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Balsa Wood (Medium, 12 lb/cu ft)
+DESCRIPTION: Medium density balsa for balanced weight/strength
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|192
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Balsa Wood (Heavy, 16 lb/cu ft)
+DESCRIPTION: High-density balsa for durability
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|256
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Baltic Birch Plywood (3-ply)
+DESCRIPTION: Aircraft grade birch plywood for bulkheads and centering rings
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|680
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Baltic Birch Plywood (5-ply)
+DESCRIPTION: Multi-ply birch plywood for structural parts
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|680
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Basswood
+DESCRIPTION: Harder than balsa, used for fins and nose cones
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|480
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Birch Plywood (Aircraft Grade)
+DESCRIPTION: High-quality birch plywood for centering rings
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|700
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.10e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Cardboard (Kraft, corrugated)
+DESCRIPTION: Common paper-based tube material for model rockets
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|550
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Cardboard (Solid, 1/16")
+DESCRIPTION: Solid chipboard for centering rings
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Kraft Paper Tube (Standard)
+DESCRIPTION: Vulcanized kraft paper, standard hobby tubes
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|780
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Kraft Paper Tube (Heavy Wall)
+DESCRIPTION: Thick paper tubing for high-power rockets
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|850
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.50e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: MDF (Medium Density Fiberboard)
+DESCRIPTION: Engineered wood for fixtures and jigs
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Oak Wood
+DESCRIPTION: Hardwood for launch pads and groundsupport
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|750
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.20e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Pine Wood
+DESCRIPTION: Softwood for jigs and non-structural parts
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|480
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|9.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Plywood (Lauan)
+DESCRIPTION: Low-cost plywood for fin templates and jigs
+CLASS: Wood
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|550
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polyurethane Foam (Rigid, 2 lb/cu ft)
+DESCRIPTION: Lightweight foam for nose cones and fillets
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|32
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e7
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polyurethane Foam (Rigid, 4 lb/cu ft)
+DESCRIPTION: Medium density foam for structural cores
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|64
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e7
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polyurethane Foam (Rigid, 6 lb/cu ft)
+DESCRIPTION: High-density foam for tip-to-tip applications
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|96
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e8
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: EPS Foam (Expanded Polystyrene)
+DESCRIPTION: Low density foam for prototyping and floats
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|20
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.50e6
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: XPS Foam (Extruded Polystyrene)
+DESCRIPTION: High-density blue/ pink foam boards
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|32
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e8
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: PVC Foam (Divinycell)
+DESCRIPTION: Marine-grade structural foam for composites
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|80
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.20e8
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Rohacell Foam
+DESCRIPTION: Rigid polymethacrylimide foam for high-temp composites
+CLASS: Foam
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|75
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|9.00e7
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Cyanoacrylate (CA, Medium)
+DESCRIPTION: Super glue, fast-setting for most bonds
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1100
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Cyanoacrylate (Thin)
+DESCRIPTION: Low-viscosity CA for wicking into joints
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1050
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.80e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Cyanoacrylate (Thick / Gel)
+DESCRIPTION: Gap-filling CA for uneven surfaces
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Epoxy (5-minute)
+DESCRIPTION: Fast-curing epoxy for quick assembly
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.50e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Epoxy (30-minute)
+DESCRIPTION: General purpose epoxy for structural bonds
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1160
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Epoxy (West System 105/205)
+DESCRIPTION: High-performance laminating epoxy for composites
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1180
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.50e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Wood Glue (PVA, white)
+DESCRIPTION: PVA glue for paper and wood assembly
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1100
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e8
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Wood Glue (Aliphatic, yellow)
+DESCRIPTION: Yellow glue for stronger wood bonds
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1120
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.00e8
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Bondo (Polyester Filler)
+DESCRIPTION: Body filler for smoothing surfaces
+CLASS: Filler
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1700
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Epoxy (High Temperature)
+DESCRIPTION: High heat resistant epoxy for motor mounts
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Epoxy (Flexible)
+DESCRIPTION: Rubber-toughened epoxy for shock absorption
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1100
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Filament Tape (Strapping Tape)
+DESCRIPTION: Fiber-reinforced tape for reinforcing
+CLASS: Tape
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Gap-filling CA (Rubber Toughened)
+DESCRIPTION: Resilient CA for parts with vibration
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1100
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.36
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Hot Melt Glue
+DESCRIPTION: Quick-assembly adhesive for fixture (NOT for flight-critical)
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|950
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e8
+DEP: Poisson's Ratio||0.45
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Masking Tape
+DESCRIPTION: Low-tack tape for masking during painting
+CLASS: Tape
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|600
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e7
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Plastic Model Cement
+DESCRIPTION: Solvent-based cement for polystyrene parts
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|980
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Polyurethane Glue (Gorilla)
+DESCRIPTION: Expanding, moisture-curing polyurethane glue
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Silicone Adhesive / Sealant
+DESCRIPTION: Flexible adhesive for electronics and seals
+CLASS: Adhesive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1050
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e6
+DEP: Poisson's Ratio||0.49
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Ripstop Nylon (1.1 oz)
+DESCRIPTION: Lightweight nylon for parachutes
+CLASS: Textile
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Ripstop Nylon (2.0 oz)
+DESCRIPTION: Heavy-duty nylon for large parachutes
+CLASS: Textile
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Mylar (BoPET)
+DESCRIPTION: Polyester film for streamers and lightweight parachutes
+CLASS: Plastic Film
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1390
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.50e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nomex Heat Shield
+DESCRIPTION: Flame-resistant fabric for shock cords
+CLASS: Textile
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1400
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Kevlar Shock Cord
+DESCRIPTION: High-strength, low-stretch cord for recovery
+CLASS: Fiber
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1440
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|7.00e10
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nylon Shock Cord
+DESCRIPTION: Elastic cord for low-power rocket recovery
+CLASS: Fiber
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Tubular Nylon Webbing
+DESCRIPTION: Woven nylon for harnesses and recovery systems
+CLASS: Textile
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Copper Clad Laminate (PCB)
+DESCRIPTION: Circuit board material for custom electronics
+CLASS: Composite
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.40e10
+DEP: Poisson's Ratio||0.20
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Lead-Free Solder (Sn96.5/Ag3.5)
+DESCRIPTION: Lead-free solder for electronics assembly
+CLASS: Metal Alloy
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|7380
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|4.60e10
+DEP: Poisson's Ratio||0.36
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Lexan (Polycarbonate Sheet)
+DESCRIPTION: Impact-resistant clear sheet for payload windows
+CLASS: Plastic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.40e9
+DEP: Poisson's Ratio||0.38
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nose Cone Plastic (HIPS)
+DESCRIPTION: High Impact Polystyrene for blow-molded nose cones
+CLASS: Plastic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1050
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.30e9
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nose Cone Plastic (ABS)
+DESCRIPTION: Injection molded ABS nose cones
+CLASS: Plastic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1040
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.30e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nose Cone Plastic (Polypropylene)
+DESCRIPTION: Blow-molded polypropylene nose cones, very durable
+CLASS: Plastic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|910
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e9
+DEP: Poisson's Ratio||0.43
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Paper Centering Ring Material
+DESCRIPTION: Layered paper or cardstock for centering rings
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|800
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Phenolic Centering Ring Material
+DESCRIPTION: Layered phenolic for structural rings
+CLASS: Composite
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1350
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Primer (Spray, Acrylic)
+DESCRIPTION: Sandable primer for surface prep before paint
+CLASS: Coating
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Rattle Can Paint (Enamel)
+DESCRIPTION: Standard spray paint for finishing
+CLASS: Coating
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Rattle Can Paint (Lacquer)
+DESCRIPTION: High-gloss, fast-drying spray paint
+CLASS: Coating
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Clear Coat (Acrylic Lacquer)
+DESCRIPTION: Protective clear finish for paint
+CLASS: Coating
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Clear Coat (2K Urethane)
+DESCRIPTION: Professional-grade durable clear finish
+CLASS: Coating
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1100
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e9
+DEP: Poisson's Ratio||0.35
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Sandpaper (Aluminum Oxide)
+DESCRIPTION: Abrasive paper for surface prep
+CLASS: Abrasive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1500
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Sandpaper (Silicon Carbide)
+DESCRIPTION: Wet sanding abrasive for fine finishing
+CLASS: Abrasive
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1600
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Masking Fluid (Liquid Mask)
+DESCRIPTION: Peelable coating for masking details
+CLASS: Coating
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e7
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Launch Lug Cardboard Tube
+DESCRIPTION: Small paper tube for launch lugs
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|600
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Launch Lug Nylon Tubing
+DESCRIPTION: Solid nylon tube for launch lugs
+CLASS: Plastic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1140
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.80e9
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Kapton Tape (Polyimide)
+DESCRIPTION: High-temperature tape for electronics and motor
+CLASS: Tape
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1420
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.50e9
+DEP: Poisson's Ratio||0.34
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Teflon Tape (PTFE)
+DESCRIPTION: Low friction tape for threads and seals
+CLASS: Tape
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2200
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e8
+DEP: Poisson's Ratio||0.46
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Duct Tape
+DESCRIPTION: Heavy-duty cloth tape for temporary fixes
+CLASS: Tape
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e8
+DEP: Poisson's Ratio||0.40
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Silicone Rubber (High Temp)
+DESCRIPTION: Flexible high-temperature silicone for motor seals
+CLASS: Elastomer
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1150
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e6
+DEP: Poisson's Ratio||0.49
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Viton Rubber
+DESCRIPTION: High-performance fluoroelastomer for fuel exposure
+CLASS: Elastomer
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1820
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.50e7
+DEP: Poisson's Ratio||0.49
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Buna-N Rubber (Nitrile)
+DESCRIPTION: Oil-resistant rubber for seals
+CLASS: Elastomer
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1100
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e7
+DEP: Poisson's Ratio||0.49
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: EPDM Rubber
+DESCRIPTION: Weather-resistant rubber for seals and o-rings
+CLASS: Elastomer
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1000
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|8.00e6
+DEP: Poisson's Ratio||0.49
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Zirconia (ZrO2)
+DESCRIPTION: Ceramic for high-temperature insulation and nozzles
+CLASS: Ceramic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|5680
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.10e11
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Alumina (Al2O3)
+DESCRIPTION: High-temperature ceramic for insulating components
+CLASS: Ceramic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|3960
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|3.80e11
+DEP: Poisson's Ratio||0.22
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Glass-Filled Ceramic (MACOR)
+DESCRIPTION: Machinable glass ceramic for custom parts
+CLASS: Ceramic
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|2520
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|6.70e10
+DEP: Poisson's Ratio||0.29
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Refractory Cork (Ablative)
+DESCRIPTION: Ablative cork for heat shields and nozzle insulation
+CLASS: Composite
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|300
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|2.00e7
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Nomex Paper (Flame Resistant)
+DESCRIPTION: Flame-resistant paper for heat shielding
+CLASS: Paper
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|700
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|5.00e9
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
+
+MATERIAL: Phenolic-Impregnated Ablative Material
+DESCRIPTION: Highly ablative material for nozzles
+CLASS: Composite
+PROPERTY: Density
+PQUAL: Field Variable Compatible=Temperature
+DEP: Density|kg m^-3|1300
+IND: Temperature|C|22|22
+ENDPROPERTY
+PROPERTY: IsotropicElasticity
+PQUAL: Behavior=Isotropic
+PQUAL: Matrix Type=Stiffness
+PQUAL: Format=IEEE
+DEP: Young's Modulus|Pa|1.00e10
+DEP: Poisson's Ratio||0.30
+IND: Temperature|C|22|22
+ENDPROPERTY
+ENDMATERIAL
