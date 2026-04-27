@@ -1,43 +1,47 @@
-# Material XML Builder
+# Material XML Parser (Ansys Granta / EngineeringData)
 
-`material_xml_gui.py` is a Tkinter GUI that builds the custom `EngineeringData` XML format.
+This repository now includes `material_xml_parser.py`, a Python module that parses the Ansys Granta MatML/EngineeringData XML structure into Python dataclasses and JSON-serializable objects.
 
-## Features
-- Add material data manually in the GUI.
-- Add properties with dependent/independent values.
-- Import one or more materials from a plain text list file.
-- Export XML with:
-  - `EngineeringData > item > MatML_Doc`
-  - `Material/BulkDetails/PropertyData`
-  - Metadata (`ParameterDetails`, `PropertyDetails`) and ID linking (`paX`, `prX`).
+## What it parses
 
-## Run
+Supported wrappers:
+- `<merged><item><EngineeringData>...`
+- direct `<EngineeringData>` files
+- direct `<MatML_Doc>` files
 
-```bash
-python3 material_xml_gui.py
+Supported sections:
+- `Material/BulkDetails` (`Name`, `Description`, `Class`, `Subclass`)
+- `PropertyData` with linked `PropertyDetails` IDs (`prX`)
+- `ParameterValue` with linked `ParameterDetails` IDs (`paY`)
+- metadata units (`<Units>/<Unit power="...">`, `<Unitless/>`)
+- qualifiers at property and parameter level
+- interpolation/extrapolation options from `pa6`
+
+## API
+
+- `load_from_xml(filepath: str) -> MaterialDatabase`
+- `to_json(material_db, filepath: str)`
+- `get_material(material_db, name: str) -> Optional[Material]`
+- `evaluate_property(material, prop_name, **field_vars) -> float` (basic helper)
+
+## Quick usage
+
+```python
+from material_xml_parser import load_from_xml, get_material
+
+db = load_from_xml("example_engineering_data.xml")
+air = get_material(db, "Air, gas")
+print(air.properties["Density"].unit)
+print(db.to_json())
 ```
 
-## Text import format
-Use blocks like this:
+## Notes
 
-```text
-MATERIAL: Air, gas
-DESCRIPTION: Optional
-CLASS: Fluids
-SUBCLASS: Gases
+- Dependent and independent comma-separated lists are aligned by index.
+- If a property has no independent variable, points are stored with an empty `independent` list.
+- For one independent variable, `evaluate_property` performs linear interpolation.
+- For multi-dimensional properties, `evaluate_property` currently does exact-match lookup.
 
-PROPERTY: Density
-DEPENDENT: Density|kg m^-3|1.16,1.00
-INDEPENDENT: Temperature|C|23,100
-QUALIFIER: Behavior=Isotropic
-INTERPOLATION: Linear Multivariate (Qhull)
-EXTRAPOLATION: Projection to the Bounding Box
-ENDPROPERTY
-ENDMATERIAL
-```
+## Example files
 
-- `DEPENDENT` and `INDEPENDENT` use `name|unit|comma,separated,values`.
-- You can add multiple `INDEPENDENT` lines per property for multivariate tables.
-- Add multiple `QUALIFIER` lines as `key=value`.
-
-See `example_materials.txt` for a complete sample.
+- `example_engineering_data.xml`: sample XML for smoke testing.

@@ -1,0 +1,87 @@
+<merged>
+  <item>
+    <EngineeringData version="1.0" versiondate="2026-04-27">
+      <Notes/>
+      <Materials>
+        <MatML_Doc>
+          <Material>
+            <BulkDetails>
+              <Name>Air, gas</Name>
+              <Description>Demo material</Description>
+              <Class><Name>Fluids</Name></Class>
+              <Subclass><Name>Gases</Name></Subclass>
+
+              <PropertyData property="pr1">
+                <Data format="string">-</Data>
+                <Qualifier name="Behavior">Isotropic</Qualifier>
+
+                <ParameterValue parameter="pa6" format="string">
+                  <Data>Interpolation Options</Data>
+                  <Qualifier name="AlgorithmType">Linear Multivariate (Qhull)</Qualifier>
+                  <Qualifier name="ExtrapolationType">Projection to the Bounding Box</Qualifier>
+                </ParameterValue>
+
+                <ParameterValue parameter="pa1">
+                  <Data>1.16,1.00,0.95</Data>
+                  <Qualifier name="Variable Type">Dependent,Dependent,Dependent</Qualifier>
+                </ParameterValue>
+
+                <ParameterValue parameter="pa2">
+                  <Data>23,100,150</Data>
+                  <Qualifier name="Variable Type">Independent,Independent,Independent</Qualifier>
+                  <Qualifier name="Field Variable">Temperature</Qualifier>
+                  <Qualifier name="Field Units">C</Qualifier>
+                  <Qualifier name="Default Data">23</Qualifier>
+                </ParameterValue>
+              </PropertyData>
+
+              <PropertyData property="pr2">
+                <Data format="string">-</Data>
+                <ParameterValue parameter="pa3">
+                  <Data>1.832e-05</Data>
+                  <Qualifier name="Variable Type">Dependent</Qualifier>
+                </ParameterValue>
+                <ParameterValue parameter="pa2">
+                  <Data>23</Data>
+                  <Qualifier name="Variable Type">Independent</Qualifier>
+                  <Qualifier name="Field Variable">Temperature</Qualifier>
+                  <Qualifier name="Field Units">C</Qualifier>
+                </ParameterValue>
+              </PropertyData>
+            </BulkDetails>
+          </Material>
+
+          <Metadata>
+            <ParameterDetails id="pa1">
+              <Name>Density</Name>
+              <Units>
+                <Unit><Name>kg</Name></Unit>
+                <Unit power="-3"><Name>m</Name></Unit>
+              </Units>
+            </ParameterDetails>
+            <ParameterDetails id="pa2">
+              <Name>Temperature</Name>
+              <Units>
+                <Unit><Name>C</Name></Unit>
+              </Units>
+            </ParameterDetails>
+            <ParameterDetails id="pa3">
+              <Name>Dynamic Viscosity</Name>
+              <Units>
+                <Unit><Name>Pa</Name></Unit>
+                <Unit><Name>s</Name></Unit>
+              </Units>
+            </ParameterDetails>
+            <ParameterDetails id="pa6">
+              <Name>Interpolation Options</Name>
+              <Unitless/>
+            </ParameterDetails>
+
+            <PropertyDetails id="pr1"><Name>Density</Name></PropertyDetails>
+            <PropertyDetails id="pr2"><Name>Viscosity</Name></PropertyDetails>
+          </Metadata>
+        </MatML_Doc>
+      </Materials>
+    </EngineeringData>
+  </item>
+</merged>
