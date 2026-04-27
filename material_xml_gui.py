@@ -86,6 +86,24 @@ class EngineeringDataBuilder:
         return ",".join(v.strip() for v in values if v.strip())
 
     @staticmethod
+    def _is_float_like(value: str) -> bool:
+        txt = value.strip()
+        if not txt:
+            return False
+        try:
+            float(txt)
+            return True
+        except ValueError:
+            return False
+
+    @classmethod
+    def _series_format(cls, values: List[str]) -> str:
+        non_empty = [v.strip() for v in values if v.strip()]
+        if not non_empty:
+            return "float"
+        return "float" if all(cls._is_float_like(v) for v in non_empty) else "string"
+
+    @staticmethod
     def _var_type(kind: str, count: int) -> str:
         if count <= 0:
             return kind
@@ -142,14 +160,18 @@ class EngineeringDataBuilder:
 
                 for dep in prop.dependent_series:
                     pid = self._alloc_param_id(dep.name, dep.unit)
-                    pval = ET.SubElement(pnode, "ParameterValue", parameter=pid, format="float")
+                    dep_format = self._series_format(dep.values)
+                    pval = ET.SubElement(pnode, "ParameterValue", parameter=pid, format=dep_format)
                     ET.SubElement(pval, "Data").text = self._to_csv(dep.values)
-                    q = ET.SubElement(pval, "Qualifier", name="Variable Type")
-                    q.text = self._var_type("Dependent", len(dep.values))
+                    # Some string metadata-like rows (e.g., Appearance labels) are better left without Variable Type.
+                    if dep_format == "float":
+                        q = ET.SubElement(pval, "Qualifier", name="Variable Type")
+                        q.text = self._var_type("Dependent", len(dep.values))
 
                 for indep in prop.independent_series:
                     pid = self._alloc_param_id(indep.name, indep.unit)
-                    pval = ET.SubElement(pnode, "ParameterValue", parameter=pid, format="float")
+                    indep_format = self._series_format(indep.values)
+                    pval = ET.SubElement(pnode, "ParameterValue", parameter=pid, format=indep_format)
                     ET.SubElement(pval, "Data").text = self._to_csv(indep.values)
                     q = ET.SubElement(pval, "Qualifier", name="Variable Type")
                     q.text = self._var_type("Independent", len(indep.values))
@@ -374,6 +396,8 @@ class App(tk.Tk):
     @staticmethod
     def _material_issues(material: MaterialEntry) -> List[str]:
         observed = set()
+        if not material.properties:
+            return ["no properties defined"]
         for prop in material.properties:
             observed.add(prop.name.casefold())
             for dep in prop.dependent_series:

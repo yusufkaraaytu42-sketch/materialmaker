@@ -81,3 +81,9 @@ TXT import format uses:
 - `IND: name|unit|v1,v2,...`
 - `PQUAL: key=value`
 - `OPTION_NAME`, `INTERPOLATION`, `EXTRAPOLATION`
+
+## Troubleshooting (Mechanical shows no libraries)
+
+- If a generated library is malformed, Mechanical may fail to load *all* libraries until that file is removed.
+- This GUI now auto-detects numeric vs string parameter series and writes `format=\"string\"` when values are non-numeric (for entries like `Appearance` labels).
+- Export blocks duplicate material names and warns when core engineering properties are missing (Density / Young's Modulus / Poisson's Ratio), because those materials are often filtered out in Mechanical.
