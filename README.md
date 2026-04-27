@@ -48,6 +48,24 @@ print(db.to_json())
 - `example_engineering_data.xml`: sample XML for smoke testing.
 - `example_hyperelastic.xml`: sample matching real hyperelastic-style structure with multi-independent data and multiple dependent scalar parameters.
 - `example_materials.txt`: sample import file for the reworked GUI builder.
+- `example_property_codebook.txt`: sample markdown table containing `prX` / `paX` code mappings for bot upload testing.
+
+
+## Property/parameter codebook parsing
+
+The parser can now ingest markdown/text tables for `prX` and `paX` mappings (like the list you shared):
+
+```python
+from material_xml_parser import load_codebook_text
+
+codebook = load_codebook_text("example_property_codebook.txt")
+print(codebook.lookup("pr1"))
+print(codebook.lookup("pa26"))
+```
+
+- Supports `## Property Codes`, `## Parameter Codes`, and `## Independent Variables` sections.
+- Accepts inline code formatting (e.g., `` `pa1` ``) and expands numeric ranges (e.g., `` `pa46` – `pa62` ``).
+- Stores parsed records as `MaterialCodebook` / `CodeDefinition` dataclasses.
 
 ## Reworked GUI builder
 

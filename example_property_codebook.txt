@@ -1,0 +1,44 @@
+# Example material property codebook upload
+
+## Property Codes (`prX`)
+
+| Code | Name / Description | Typical Units | Appears in Files |
+|------|--------------------|---------------|------------------|
+| `pr0` | **Color** (RGB values) | unitless | All |
+| `pr1` | **Density** (mass per volume) | kg/m³ | 13, s, 4, 5, 6, 7, 8, 9, 10, 11 |
+| `pr2` | **Specific Heat** (constant pressure) | J/(kg·°C) | 13, s, 4, 5, 6, 7, 8, 9 |
+| `pr3` | **Elasticity** (Young’s modulus, Poisson’s ratio, etc.) | Pa, unitless | 4, 5, 6, 7, 8, 9 |
+| `pr4` | **Relative Permeability** (magnetic) | unitless | 13, 4, 5, 6, 7, 8, 9 |
+| `pr14` | **Resistivity** (electrical) | Ω·m | 4, 5, 6, 7, 8, 9 |
+| `pr22` | **Ogden** (hyperelastic) | Pa, unitless | 9, 10 |
+| `pr23` | **Mooney‑Rivlin** (hyperelastic) | Pa, unitless | 9, 10 |
+| `pr30` | **B‑H Curve** (magnetic) | T, A/m | 11 |
+
+## Parameter Codes (`paX`)
+
+| Code | Name / Description | Typical Units | Comment |
+|------|--------------------|---------------|---------|
+| `pa1` | **Thermal Conductivity** (isotropic) | W/(m·°C) | Dependent variable |
+| `pa2` | **Temperature** (independent variable) | °C | Often the field variable |
+| `pa3` | **Density** (mass per volume) | kg/m³ | Dependent variable |
+| `pa4` | **Specific Heat** (constant pressure) | J/(kg·°C) | Dependent variable |
+| `pa9` | **Tensile Yield Strength** | Pa | Dependent |
+| `pa16` | **Alternating Stress** (fatigue) | Pa | Dependent, S‑N curve |
+| `pa17` | **Cycles** (fatigue) | unitless | Independent, S‑N curve |
+| `pa25` | **Resistivity** | Ω·m | Dependent |
+| `pa26` | **Young’s Modulus** | Pa | Dependent |
+| `pa27` | **Poisson’s Ratio** | unitless | Dependent |
+| `pa40` | **CTE X direction** | 1/°C | Orthotropic |
+| `pa46` – `pa62` | **Anisotropic elasticity constants** | Pa | Stiffness/compliance tensor block |
+| `pa89` – `pa97` | **Ogden hyperelastic constants** | Pa, unitless | See 9.xml, 10.xml |
+| `pa98` – `pa99` | **Mooney‑Rivlin constants** | Pa | See 9.xml, 10.xml |
+| `pa124` – `pa125` | **Drucker‑Prager strength** | Pa | See 9.xml |
+
+## Independent Variables (Field Variables)
+
+| Code | Name | Units |
+|------|------|-------|
+| `pa2` / `pa8` | **Temperature** | °C |
+| `pa18` | **Mean Stress** (fatigue) | Pa |
+| `pa30` | **R‑Ratio** (fatigue) | unitless |
+| `pa1` (in some contexts) | **Strain** (hyperelastic test data) | m/m |

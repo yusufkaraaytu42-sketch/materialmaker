@@ -65,6 +65,114 @@ def _unit_string(parameter_details: ET.Element) -> Optional[str]:
 
 
 @dataclass
+class CodeDefinition:
+    code: str
+    name: str
+    unit: Optional[str] = None
+    notes: str = ""
+
+
+@dataclass
+class MaterialCodebook:
+    properties: Dict[str, CodeDefinition] = field(default_factory=dict)
+    parameters: Dict[str, CodeDefinition] = field(default_factory=dict)
+    independent_variables: Dict[str, CodeDefinition] = field(default_factory=dict)
+
+    def lookup(self, code: str) -> Optional[CodeDefinition]:
+        key = code.strip().lower()
+        return self.properties.get(key) or self.parameters.get(key) or self.independent_variables.get(key)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "properties": {k: asdict(v) for k, v in self.properties.items()},
+            "parameters": {k: asdict(v) for k, v in self.parameters.items()},
+            "independent_variables": {k: asdict(v) for k, v in self.independent_variables.items()},
+        }
+
+
+def _strip_md(value: str) -> str:
+    cleaned = value.strip()
+    for token in ("`", "**", "__"):
+        cleaned = cleaned.replace(token, "")
+    return " ".join(cleaned.split())
+
+
+def _extract_codes(value: str) -> List[str]:
+    import re
+
+    cleaned = _strip_md(value)
+    matches = [m.lower() for m in re.findall(r"\b(?:pr|pa)\d+\b", cleaned, flags=re.IGNORECASE)]
+    if len(matches) >= 2:
+        first, second = matches[0], matches[1]
+        if first[:2] == second[:2]:
+            sep_present = any(sep in cleaned for sep in ["-", "–", "—", "to"])
+            if sep_present:
+                start, end = int(first[2:]), int(second[2:])
+                if start <= end and (end - start) <= 500:
+                    return [f"{first[:2]}{i}" for i in range(start, end + 1)]
+    return matches
+
+
+def parse_codebook_text(content: str) -> MaterialCodebook:
+    codebook = MaterialCodebook()
+    section: Optional[str] = None
+
+    for raw in content.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+
+        lower = line.casefold()
+        if lower.startswith("## property codes"):
+            section = "properties"
+            continue
+        if lower.startswith("## parameter codes"):
+            section = "parameters"
+            continue
+        if lower.startswith("## independent variables"):
+            section = "independent"
+            continue
+        if not line.startswith("|") or section is None:
+            continue
+
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 3:
+            continue
+
+        # Skip table header and separator rows.
+        if cells[0].casefold() in {"code", "------", "------:"} or set(cells[0]) <= {"-", ":"}:
+            continue
+
+        codes = _extract_codes(cells[0])
+        if not codes:
+            continue
+
+        if section == "properties":
+            name = _strip_md(cells[1])
+            unit = _strip_md(cells[2]) if len(cells) > 2 else ""
+            notes = _strip_md(cells[3]) if len(cells) > 3 else ""
+            for code in codes:
+                codebook.properties[code] = CodeDefinition(code=code, name=name, unit=unit or None, notes=notes)
+        elif section == "parameters":
+            name = _strip_md(cells[1])
+            unit = _strip_md(cells[2]) if len(cells) > 2 else ""
+            notes = _strip_md(cells[3]) if len(cells) > 3 else ""
+            for code in codes:
+                codebook.parameters[code] = CodeDefinition(code=code, name=name, unit=unit or None, notes=notes)
+        elif section == "independent":
+            name = _strip_md(cells[1]) if len(cells) > 1 else ""
+            unit = _strip_md(cells[2]) if len(cells) > 2 else ""
+            for code in codes:
+                codebook.independent_variables[code] = CodeDefinition(code=code, name=name, unit=unit or None)
+
+    return codebook
+
+
+def load_codebook_text(filepath: str) -> MaterialCodebook:
+    return parse_codebook_text(Path(filepath).read_text(encoding="utf-8"))
+
+
+@dataclass
 class IndependentValue:
     name: str
     value: Any
@@ -459,7 +567,11 @@ __all__ = [
     "MaterialProperty",
     "Material",
     "MaterialDatabase",
+    "CodeDefinition",
+    "MaterialCodebook",
     "load_from_xml",
+    "parse_codebook_text",
+    "load_codebook_text",
     "to_json",
     "get_material",
     "validate_for_mechanical",
