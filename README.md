@@ -1,45 +1,63 @@
-# ANSYS Electromagnetic Material XML Bot
+# ANSYS Material XML Bot (Any Materials)
 
-This tool generates ANSYS `EngineeringData` XML in the same structure you shared:
+This tool can now generate XML for **any materials** using two schemas:
 
-- `PropertyData property="pr0"` = **B-H Curve** (`pa0` dependent B list, `pa1` independent H list)
-- `PropertyData property="pr1"` = **Material Unique Id** (`guid`, `Display=False`)
-- `PropertyData property="pr2"` = **Color** (`pa2`, `pa3`, `pa4`, and `pa5=Appearance`)
-- Global `<Metadata>` with `pa0..pa5` and `pr0..pr2` definitions
+1. **GENERIC** for structural/thermal/fluid-style properties (arbitrary property list)
+2. **ELECTROMAGNETIC** for B-H curve materials with fixed `pr0..pr2` + `pa0..pa5`
 
-## Run (GUI)
+## Run
+
+### GUI
 
 ```bash
 python3 ansys_material_xml_bot.py
 ```
 
-## Run (CLI)
+### CLI
 
 ```bash
 python3 ansys_material_xml_bot.py --from-file materials_input_example.txt --output materials.xml
 ```
 
-## Text Input Format
+## Text format
 
-Use `materials_input_example.txt` as template:
+Use `materials_input_example.txt` as template.
+
+### Generic material
 
 ```text
-MATERIAL: Material name
-CLASS: Electromagnetic
-BH_B: 0,0.86,1.12
-BH_H: 0,317.4,476.2
-COLOR: 181,168,168
-GUID: optional-guid
+MATERIAL: Aluminum 6061-T6
+TYPE: GENERIC
+CLASS: Solids
+SUBCLASS: Metals
+DESCRIPTION: Optional
+PROPERTY: Density|2700|kg m^-3|23
+PROPERTY: Young's Modulus|6.89e10|Pa|23
 END
 ```
 
-Rules:
-- `BH_B` and `BH_H` must have the same number of comma-separated points.
-- `COLOR` is `R,G,B`.
-- `GUID` is optional (auto-generated if missing).
-- `CLASS` defaults to `Electromagnetic`.
+### Electromagnetic material
 
-## Why this fixes your issue
+```text
+MATERIAL: Silicon Core Iron
+TYPE: ELECTROMAGNETIC
+CLASS: Electromagnetic
+BH_B: 0,0.2,0.4,0.55
+BH_H: 0,59.5,119,158.7
+COLOR: 130,177,176
+GUID: optional
+END
+```
 
-Your provided XML format uses fixed property/parameter IDs (`pr0..pr2`, `pa0..pa5`) and metadata.
-This bot now emits that exact structure instead of a generic property schema.
+## Rules
+
+- `TYPE` can be `GENERIC` or `ELECTROMAGNETIC`.
+- For `GENERIC`, add one or more `PROPERTY` lines (`Name|Value|Unit|TemperatureC`).
+- For `ELECTROMAGNETIC`, `BH_B` and `BH_H` must have the same number of points.
+- `GUID` is optional in electromagnetic mode (auto-generated if omitted).
+
+## Output behavior
+
+- Electromagnetic materials use the fixed ANSYS IDs/metadata (`pr0..pr2`, `pa0..pa5`).
+- Generic materials are emitted with generated property/parameter IDs and corresponding metadata.
+- Both material types can be mixed in the same exported XML file.

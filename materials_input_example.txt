@@ -1,17 +1,45 @@
-# Electromagnetic material format for ansys_material_xml_bot.py
-# Required blocks:
-# MATERIAL, BH_B, BH_H, COLOR, END
-# Optional:
-# CLASS, GUID
+# ANY materials format for ansys_material_xml_bot.py
+# ------------------------------------------------
+# Generic material:
+# MATERIAL: Name
+# TYPE: GENERIC
+# CLASS: optional
+# SUBCLASS: optional
+# DESCRIPTION: optional
+# PROPERTY: Name|Value|Unit|TemperatureC
+# END
+#
+# Electromagnetic material:
+# MATERIAL: Name
+# TYPE: ELECTROMAGNETIC
+# CLASS: Electromagnetic
+# BH_B: comma-separated B values (Tesla)
+# BH_H: comma-separated H values (A/m)
+# COLOR: R,G,B
+# GUID: optional
+# END
 
-MATERIAL: Cold Rolled low carbon strip steel
-CLASS: Electromagnetic
-BH_B: 0,0.86,1.12,1.23,1.32,1.49,1.61,1.68,1.73,1.77,1.89,1.98,2.02,2.045,2.135,2.304,2.634,3
-BH_H: 0,317.4,476.2,634.9,793.7,1507,3175,4762,6349,7937,15873,31746,47619,63492,126984,253963,507936,793651
-COLOR: 181,168,168
+MATERIAL: Aluminum 6061-T6
+TYPE: GENERIC
+CLASS: Solids
+SUBCLASS: Metals
+DESCRIPTION: Common structural aluminum alloy.
+PROPERTY: Density|2700|kg m^-3|23
+PROPERTY: Young's Modulus|6.89e10|Pa|23
+PROPERTY: Poisson Ratio|0.33||23
+END
+
+MATERIAL: Air, gas
+TYPE: GENERIC
+CLASS: Fluids
+SUBCLASS: Gases
+PROPERTY: Density|1.16|kg m^-3|23
+PROPERTY: Dynamic Viscosity|1.832e-05|Pa s|23
+PROPERTY: Thermal Conductivity|0.02582|W m^-1 C^-1|23
 END
 
 MATERIAL: Silicon Core Iron
+TYPE: ELECTROMAGNETIC
 CLASS: Electromagnetic
 BH_B: 0,0.2,0.4,0.55,1.15,1.3,1.4,1.55,1.635,1.655,1.675,1.6925
 BH_H: 0,59.5238,119.048,158.73,396.825,555.556,793.651,1587.3,3968.25,7936.51,15873,31746
