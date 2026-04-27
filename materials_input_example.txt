@@ -1,0 +1,22 @@
+# Example batch file for ansys_material_xml_bot.py
+# One MATERIAL block per material. PROPERTY format:
+# PROPERTY: Property Name|Value|Units|TemperatureC
+
+MATERIAL: Air, gas
+DESCRIPTION: Gas, Air data for a simple simulation setup.
+CLASS: Fluids
+SUBCLASS: Gases
+PROPERTY: Density|1.16|kg m^-3|23
+PROPERTY: Dynamic Viscosity|1.832e-05|Pa s|23
+PROPERTY: Thermal Conductivity|0.02582|W m^-1 C^-1|23
+PROPERTY: Specific Heat|1021|J kg^-1 C^-1|23
+END
+
+MATERIAL: Custom Epoxy
+DESCRIPTION: Example custom resin for testing.
+CLASS: Solids
+SUBCLASS: Polymers
+PROPERTY: Density|1180|kg m^-3|23
+PROPERTY: Young's Modulus|3.1e9|Pa|23
+PROPERTY: Poisson Ratio|0.35||23
+END
